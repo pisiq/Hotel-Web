@@ -43,60 +43,32 @@
         </div>
     </div>
 </nav>
+
 <div class="hero">
     <div class="container my-5 ">
         <div class="row m-md-4">
-            <h2 class="text-center ">Leave a review</h2>
+            <h2 class="text-center ">Login</h2>
         </div>
         <div class="card p-4 shadow-lg default ">
             <form>
-                <!-- Location Selection -->
                 <div class="mb-3">
-                    <label class="form-label" for="location">Select Location</label>
-                    <select class="form-select" id="location" required>
-                        <option disabled selected value="">Select a destination</option>
-                        <option value="bucharest">Romania, Bucharest</option>
-                        <option value="montecarlo">Monaco, Monte Carlo</option>
-                        <option value="thailand">Thailand, Phuket</option>
-                    </select>
+                    <label class="form-label" for="Email">Email</label>
+                    <input class="form-control" id="Email" placeholder="ex:Email@gmail.com" required type="text">
                 </div>
-
-                <!-- Room Type Selection -->
-                <div class="mb-3">
-                    <label class="form-label" for="roomType">Room Type</label>
-                    <select class="form-select" id="roomType" required>
-                        <option disabled selected value="">Select room type</option>
-                        <option value="standard">Standard</option>
-                        <option value="standard-deluxe">Standard Deluxe</option>
-                        <option value="king-size">King Size</option>
-                    </select>
-                </div>
-
-                <div class="container text-center mt-5">
-                    <h2>Rate Your Experience</h2>
-                    <div class="star-rating" >
-                        <input type="radio" id="star5" name="rating" >
-                        <label for="star5" class="fas fa-star"></label>
-                        <input type="radio" id="star4" name="rating" >
-                        <label for="star4" class="fas fa-star"></label>
-                        <input type="radio" id="star3" name="rating" >
-                        <label for="star3" class="fas fa-star"></label>
-                        <input type="radio" id="star2" name="rating" >
-                        <label for="star2" class="fas fa-star"></label>
-                        <input type="radio" id="star1" name="rating" >
-                        <label for="star1" class="fas fa-star"></label>
-                    </div>
-                </div>
-
 
                 <div class="mb-3">
-                    <label class="form-label" for="Description">Describe your experience</label>
-                    <input class="form-control" id="Description" placeholder="Optional" type="text">
+                    <label class="form-label" for="Password">Password</label>
+                    <input class="form-control" id="Password" placeholder="Password" required type="text">
+                </div>
+
+                <div class="mb-3">
+                    <h6>Don't have an account?</h6>
+                    <a class="nav-link " href="Sign.html">Sign in</a>
                 </div>
 
 
-                <!-- Book Now Button -->
-                <button class="btn btn-warning btn-outline-danger w-100" type="submit">Send</button>
+
+                <button class="btn btn-warning btn-outline-danger w-100" type="submit">Login</button>
             </form>
         </div>
     </div>
