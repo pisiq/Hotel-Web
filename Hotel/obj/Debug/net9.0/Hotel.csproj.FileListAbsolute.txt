@@ -17,7 +17,6 @@ C:\Facultate\web\Hotel\obj\Debug\net9.0\Hotel.RazorAssemblyInfo.cs
 C:\Facultate\web\Hotel\obj\Debug\net9.0\scopedcss\Views\Shared\_Layout.cshtml.rz.scp.css
 C:\Facultate\web\Hotel\obj\Debug\net9.0\scopedcss\bundle\Hotel.styles.css
 C:\Facultate\web\Hotel\obj\Debug\net9.0\scopedcss\projectbundle\Hotel.bundle.scp.css
-C:\Facultate\web\Hotel\obj\Debug\net9.0\compressed\d86ydhinhk-b9sayid5wm.gz
 C:\Facultate\web\Hotel\obj\Debug\net9.0\compressed\v3695qetpg-61n19gt1b8.gz
 C:\Facultate\web\Hotel\obj\Debug\net9.0\compressed\zwfzuoh8qy-xtxxf3hu2r.gz
 C:\Facultate\web\Hotel\obj\Debug\net9.0\compressed\snp028l7p1-bqjiyaj88i.gz
@@ -337,3 +336,4 @@ C:\Facultate\web\Hotel\bin\Debug\net9.0\ru\Microsoft.CodeAnalysis.Scripting.reso
 C:\Facultate\web\Hotel\bin\Debug\net9.0\tr\Microsoft.CodeAnalysis.Scripting.resources.dll
 C:\Facultate\web\Hotel\bin\Debug\net9.0\zh-Hans\Microsoft.CodeAnalysis.Scripting.resources.dll
 C:\Facultate\web\Hotel\bin\Debug\net9.0\zh-Hant\Microsoft.CodeAnalysis.Scripting.resources.dll
+C:\Facultate\web\Hotel\obj\Debug\net9.0\compressed\d86ydhinhk-a1irelbz9e.gz

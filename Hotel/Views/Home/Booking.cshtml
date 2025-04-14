@@ -1,0 +1,52 @@
+﻿@{
+    ViewData["Title"] = "Hotel Booking";
+    Layout = "~/Views/Shared/_Layout.cshtml"; // Ensure this matches your layout file path
+}
+
+<div class="hero">
+    <div class="container my-5">
+        <div class="row m-md-4">
+            <h2 class="text-center">Book Your Stay</h2>
+        </div>
+        <div class="card p-4 shadow-lg default">
+            <form method="post" asp-page-handler="Book">
+                <!-- Location Selection -->
+                <div class="mb-3">
+                    <label class="form-label" for="location">Select Location</label>
+                    <select class="form-select" id="location" name="Location" required>
+                        <option disabled selected value="">Select a destination</option>
+                        <option value="bucharest">Romania, Bucharest</option>
+                        <option value="montecarlo">Monaco, Monte Carlo</option>
+                        <option value="thailand">Thailand, Phuket</option>
+                    </select>
+                </div>
+
+                <!-- Room Type Selection -->
+                <div class="mb-3">
+                    <label class="form-label" for="roomType">Room Type</label>
+                    <select class="form-select" id="roomType" name="RoomType" required>
+                        <option disabled selected value="">Select room type</option>
+                        <option value="standard">Standard</option>
+                        <option value="standard-deluxe">Standard Deluxe</option>
+                        <option value="king-size">King Size</option>
+                    </select>
+                </div>
+
+                <!-- Check-in & Check-out Dates -->
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label" for="checkin">Check-in Date</label>
+                        <input class="form-control" id="checkin" name="CheckInDate" required type="date">
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label" for="checkout">Check-out Date</label>
+                        <input class="form-control" id="checkout" name="CheckOutDate" required type="date">
+                    </div>
+                </div>
+
+                <!-- Book Now Button -->
+                <button class="btn btn-warning btn-outline-danger w-100" type="submit">Book Now</button>
+            </form>
+        </div>
+    </div>
+</div>

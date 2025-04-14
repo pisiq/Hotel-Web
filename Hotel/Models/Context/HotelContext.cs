@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Hotel.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace Hotel.Models.Context
 {

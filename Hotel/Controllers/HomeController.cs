@@ -18,7 +18,19 @@ namespace WebApplication1.Controllers
             return View();
         }
 
-        public IActionResult Privacy()
+        public IActionResult Booking()
+        {
+            return View();
+        }
+        public IActionResult Rooms()
+        {
+            return View();
+        }
+        public IActionResult Login()
+        {
+            return View();
+        }
+        public IActionResult Sign()
         {
             return View();
         }

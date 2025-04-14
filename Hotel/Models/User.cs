@@ -1,4 +1,5 @@
-﻿namespace Hotel.Models
+﻿using Microsoft.AspNetCore.Identity;
+namespace Hotel.Models
 {
     public class User 
     {

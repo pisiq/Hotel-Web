@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "XVGNbDzFt2/FdSsJY1IitIi3JW82UHppWUjSszl4wsM=",
+  "Hash": "TSDI4YFBcBP9701aMfdKhTKsWiFhW5bD2YAGoMCtxQM=",
   "Source": "Hotel",
   "BasePath": "_content/Hotel",
   "Mode": "Default",
@@ -311,12 +311,12 @@
       "OriginalItemSpec": "C:\\Facultate\\web\\Hotel\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js"
     },
     {
-      "Identity": "C:\\Facultate\\web\\Hotel\\obj\\Debug\\net9.0\\compressed\\d86ydhinhk-b9sayid5wm.gz",
+      "Identity": "C:\\Facultate\\web\\Hotel\\obj\\Debug\\net9.0\\compressed\\d86ydhinhk-a1irelbz9e.gz",
       "SourceId": "Hotel",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Facultate\\web\\Hotel\\obj\\Debug\\net9.0\\compressed\\",
       "BasePath": "_content/Hotel",
-      "RelativePath": "css/site#[.{fingerprint=b9sayid5wm}]?.css.gz",
+      "RelativePath": "css/site#[.{fingerprint=a1irelbz9e}]?.css.gz",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Alternative",
@@ -325,8 +325,8 @@
       "RelatedAsset": "C:\\Facultate\\web\\Hotel\\wwwroot\\css\\site.css",
       "AssetTraitName": "Content-Encoding",
       "AssetTraitValue": "gzip",
-      "Fingerprint": "wf4wcyqcqt",
-      "Integrity": "fNKkLSNFLZMVTc2zVrpMXQqOwPU3sU4GWcfEbCR2V1I=",
+      "Fingerprint": "tkm8mtdrf5",
+      "Integrity": "TR6mEnhbpwQ3M9IpuDUQv/FDxYCd0wHwVp0VS/GbU3U=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "C:\\Facultate\\web\\Hotel\\wwwroot\\css\\site.css"
@@ -1417,8 +1417,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "b9sayid5wm",
-      "Integrity": "j6fhJSuuyLpOSLuPJU0TsDV0iNjor5S3rDnvxJrt4bg=",
+      "Fingerprint": "a1irelbz9e",
+      "Integrity": "DkajPaGXg0l6bvxgJDiYr0n7vGnrc1fSxorszdrMBWg=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\site.css"
@@ -2728,13 +2728,13 @@
   ],
   "Endpoints": [
     {
-      "Route": "css/site.b9sayid5wm.css",
-      "AssetFile": "C:\\Facultate\\web\\Hotel\\obj\\Debug\\net9.0\\compressed\\d86ydhinhk-b9sayid5wm.gz",
+      "Route": "css/site.a1irelbz9e.css",
+      "AssetFile": "C:\\Facultate\\web\\Hotel\\obj\\Debug\\net9.0\\compressed\\d86ydhinhk-a1irelbz9e.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
           "Value": "gzip",
-          "Quality": "0.003125000000"
+          "Quality": "0.002304147465"
         }
       ],
       "ResponseHeaders": [
@@ -2744,15 +2744,15 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "319"
+          "Value": "433"
         },
         {
           "Name": "ETag",
-          "Value": "\"fNKkLSNFLZMVTc2zVrpMXQqOwPU3sU4GWcfEbCR2V1I=\""
+          "Value": "\"TR6mEnhbpwQ3M9IpuDUQv/FDxYCd0wHwVp0VS/GbU3U=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 01 Apr 2025 14:01:13 GMT"
+          "Value": "Sun, 13 Apr 2025 12:21:22 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -2772,13 +2772,13 @@
         },
         {
           "Name": "ETag",
-          "Value": "W/\"j6fhJSuuyLpOSLuPJU0TsDV0iNjor5S3rDnvxJrt4bg=\""
+          "Value": "W/\"DkajPaGXg0l6bvxgJDiYr0n7vGnrc1fSxorszdrMBWg=\""
         }
       ],
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "b9sayid5wm"
+          "Value": "a1irelbz9e"
         },
         {
           "Name": "label",
@@ -2786,12 +2786,12 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-j6fhJSuuyLpOSLuPJU0TsDV0iNjor5S3rDnvxJrt4bg="
+          "Value": "sha256-DkajPaGXg0l6bvxgJDiYr0n7vGnrc1fSxorszdrMBWg="
         }
       ]
     },
     {
-      "Route": "css/site.b9sayid5wm.css",
+      "Route": "css/site.a1irelbz9e.css",
       "AssetFile": "C:\\Facultate\\web\\Hotel\\wwwroot\\css\\site.css",
       "Selectors": [],
       "ResponseHeaders": [
@@ -2801,7 +2801,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "667"
+          "Value": "973"
         },
         {
           "Name": "Content-Type",
@@ -2809,11 +2809,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"j6fhJSuuyLpOSLuPJU0TsDV0iNjor5S3rDnvxJrt4bg=\""
+          "Value": "\"DkajPaGXg0l6bvxgJDiYr0n7vGnrc1fSxorszdrMBWg=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 01 Apr 2025 14:01:13 GMT"
+          "Value": "Sun, 13 Apr 2025 12:21:22 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -2823,7 +2823,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "b9sayid5wm"
+          "Value": "a1irelbz9e"
         },
         {
           "Name": "label",
@@ -2831,13 +2831,13 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-j6fhJSuuyLpOSLuPJU0TsDV0iNjor5S3rDnvxJrt4bg="
+          "Value": "sha256-DkajPaGXg0l6bvxgJDiYr0n7vGnrc1fSxorszdrMBWg="
         }
       ]
     },
     {
-      "Route": "css/site.b9sayid5wm.css.gz",
-      "AssetFile": "C:\\Facultate\\web\\Hotel\\obj\\Debug\\net9.0\\compressed\\d86ydhinhk-b9sayid5wm.gz",
+      "Route": "css/site.a1irelbz9e.css.gz",
+      "AssetFile": "C:\\Facultate\\web\\Hotel\\obj\\Debug\\net9.0\\compressed\\d86ydhinhk-a1irelbz9e.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -2846,7 +2846,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "319"
+          "Value": "433"
         },
         {
           "Name": "Content-Type",
@@ -2854,11 +2854,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"fNKkLSNFLZMVTc2zVrpMXQqOwPU3sU4GWcfEbCR2V1I=\""
+          "Value": "\"TR6mEnhbpwQ3M9IpuDUQv/FDxYCd0wHwVp0VS/GbU3U=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 01 Apr 2025 14:01:13 GMT"
+          "Value": "Sun, 13 Apr 2025 12:21:22 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -2876,7 +2876,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "b9sayid5wm"
+          "Value": "a1irelbz9e"
         },
         {
           "Name": "label",
@@ -2884,18 +2884,18 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-fNKkLSNFLZMVTc2zVrpMXQqOwPU3sU4GWcfEbCR2V1I="
+          "Value": "sha256-TR6mEnhbpwQ3M9IpuDUQv/FDxYCd0wHwVp0VS/GbU3U="
         }
       ]
     },
     {
       "Route": "css/site.css",
-      "AssetFile": "C:\\Facultate\\web\\Hotel\\obj\\Debug\\net9.0\\compressed\\d86ydhinhk-b9sayid5wm.gz",
+      "AssetFile": "C:\\Facultate\\web\\Hotel\\obj\\Debug\\net9.0\\compressed\\d86ydhinhk-a1irelbz9e.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
           "Value": "gzip",
-          "Quality": "0.003125000000"
+          "Quality": "0.002304147465"
         }
       ],
       "ResponseHeaders": [
@@ -2905,15 +2905,15 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "319"
+          "Value": "433"
         },
         {
           "Name": "ETag",
-          "Value": "\"fNKkLSNFLZMVTc2zVrpMXQqOwPU3sU4GWcfEbCR2V1I=\""
+          "Value": "\"TR6mEnhbpwQ3M9IpuDUQv/FDxYCd0wHwVp0VS/GbU3U=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 01 Apr 2025 14:01:13 GMT"
+          "Value": "Sun, 13 Apr 2025 12:21:22 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -2933,13 +2933,13 @@
         },
         {
           "Name": "ETag",
-          "Value": "W/\"j6fhJSuuyLpOSLuPJU0TsDV0iNjor5S3rDnvxJrt4bg=\""
+          "Value": "W/\"DkajPaGXg0l6bvxgJDiYr0n7vGnrc1fSxorszdrMBWg=\""
         }
       ],
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-j6fhJSuuyLpOSLuPJU0TsDV0iNjor5S3rDnvxJrt4bg="
+          "Value": "sha256-DkajPaGXg0l6bvxgJDiYr0n7vGnrc1fSxorszdrMBWg="
         }
       ]
     },
@@ -2954,7 +2954,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "667"
+          "Value": "973"
         },
         {
           "Name": "Content-Type",
@@ -2962,11 +2962,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"j6fhJSuuyLpOSLuPJU0TsDV0iNjor5S3rDnvxJrt4bg=\""
+          "Value": "\"DkajPaGXg0l6bvxgJDiYr0n7vGnrc1fSxorszdrMBWg=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 01 Apr 2025 14:01:13 GMT"
+          "Value": "Sun, 13 Apr 2025 12:21:22 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -2976,13 +2976,13 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-j6fhJSuuyLpOSLuPJU0TsDV0iNjor5S3rDnvxJrt4bg="
+          "Value": "sha256-DkajPaGXg0l6bvxgJDiYr0n7vGnrc1fSxorszdrMBWg="
         }
       ]
     },
     {
       "Route": "css/site.css.gz",
-      "AssetFile": "C:\\Facultate\\web\\Hotel\\obj\\Debug\\net9.0\\compressed\\d86ydhinhk-b9sayid5wm.gz",
+      "AssetFile": "C:\\Facultate\\web\\Hotel\\obj\\Debug\\net9.0\\compressed\\d86ydhinhk-a1irelbz9e.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -2991,7 +2991,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "319"
+          "Value": "433"
         },
         {
           "Name": "Content-Type",
@@ -2999,11 +2999,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"fNKkLSNFLZMVTc2zVrpMXQqOwPU3sU4GWcfEbCR2V1I=\""
+          "Value": "\"TR6mEnhbpwQ3M9IpuDUQv/FDxYCd0wHwVp0VS/GbU3U=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 01 Apr 2025 14:01:13 GMT"
+          "Value": "Sun, 13 Apr 2025 12:21:22 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -3021,7 +3021,7 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-fNKkLSNFLZMVTc2zVrpMXQqOwPU3sU4GWcfEbCR2V1I="
+          "Value": "sha256-TR6mEnhbpwQ3M9IpuDUQv/FDxYCd0wHwVp0VS/GbU3U="
         }
       ]
     },

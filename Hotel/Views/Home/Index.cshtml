@@ -2,7 +2,61 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="hero">
+    <div>
+        <h1>Welcome to Luxury Hotel</h1>
+        <p>Experience the best stay with world-class services</p>
+        <a class="btn btn-warning btn-outline-danger" asp-area="" asp-controller="Locations" asp-action="Index">Explore Options</a>
+    </div>
+</div>
+
+<div class="container my-5 text-center" id="about">
+    <a class="text-dark fw-bold" asp-area="" asp-controller="Home" asp-action="About">About Us</a>
+    <p class="text-center">
+        Luxury Hotel offers premium accommodations with breathtaking views, gourmet dining, and
+        exceptional service.
+    </p>
+</div>
+
+<div class="container my-5" id="Location">
+    <h2 class="text-center">Our Locations</h2>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Romania, Bucharest</h5>
+                    <p class="card-text">Experience comfort and luxury with a stunning view.</p>
+                    <a class="btn btn-warning btn-outline-danger" asp-area="" asp-controller="Locations" asp-action="Index">Book Now</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Monaco, Monte Carlo</h5>
+                    <p class="card-text">Spacious and elegant with premium amenities.</p>
+                    <a class="btn btn-warning btn-outline-danger" asp-area="" asp-controller="Locations" asp-action="Index">Book Now</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Thailand, Phuket</h5>
+                    <p class="card-text">Enjoy a private retreat with ocean views.</p>
+                    <a class="btn btn-warning btn-outline-danger" asp-area="" asp-controller="Locations" asp-action="Index">Book Now</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container my-5 text-center" id="contact">
+    <a class="text-center text-dark" asp-area="" asp-controller="Home" asp-action="Contact">Contact Us</a>
+    <p class="text-center">
+        For inquiries, reach out to us at <strong>contact@luxuryhotel.com</strong> or call <strong>
+            +40
+            702 222 222
+        </strong>.
+    </p>
 </div>
