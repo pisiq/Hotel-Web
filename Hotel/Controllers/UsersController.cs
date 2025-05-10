@@ -1,6 +1,7 @@
 ﻿using Hotel.Services;
 using Hotel.ViewsModels;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
@@ -9,10 +10,13 @@ namespace Hotel.Controllers
     public class UsersController : Controller
     {
         private readonly IUserService _userService;
+        private readonly SignInManager<IdentityUser> _signInManager;
 
-        public UsersController(IUserService userService)
+
+        public UsersController(IUserService userService, SignInManager<IdentityUser> signInManager)
         {
             _userService = userService;
+            _signInManager = signInManager;
         }
 
         [HttpGet]
@@ -33,13 +37,21 @@ namespace Hotel.Controllers
 
             if (isAuthenticated)
             {
-                // Store user email in session
-                HttpContext.Session.SetString("UserEmail", model.Email);
+                // Sign in the user using SignInManager
+                var user = new IdentityUser { UserName = model.Email, Email = model.Email };
+                await _signInManager.SignInAsync(user, isPersistent: false);
+
                 return RedirectToAction("Index", "Home");
             }
 
             ModelState.AddModelError("", "Invalid email or password");
             return View(model);
+        }
+        [HttpGet]
+        public async Task<IActionResult> Logout()
+        {
+            await _signInManager.SignOutAsync();
+            return RedirectToAction("Index", "Home");
         }
 
         [HttpGet]
@@ -65,12 +77,6 @@ namespace Hotel.Controllers
 
             ModelState.AddModelError("", "Email already in use");
             return View(model);
-        }
-
-        public IActionResult Logout()
-        {
-            HttpContext.Session.Clear();
-            return RedirectToAction("Index", "Home");
-        }
+        }    
     }
 }

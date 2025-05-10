@@ -2,6 +2,7 @@ using Hotel.Data;
 using Hotel.Models;
 using Hotel.Models.Context;
 using Hotel.Services;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System;
 
@@ -15,7 +16,14 @@ builder.Services.AddDbContext<HotelContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("BloggingDb")));
 
 // Add session support
-builder.Services.AddDistributedMemoryCache();
+builder.Services.AddIdentity<IdentityUser, IdentityRole>()
+    .AddEntityFrameworkStores<HotelContext>()
+    .AddDefaultTokenProviders();
+
+builder.Services.AddAuthentication(IdentityConstants.ApplicationScheme)
+    .AddCookie();
+
+builder.Services.AddDistributedMemoryCache(); // Required for session
 builder.Services.AddSession(options =>
 {
     options.IdleTimeout = TimeSpan.FromMinutes(30);

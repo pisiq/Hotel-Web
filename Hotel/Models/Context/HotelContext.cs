@@ -1,9 +1,11 @@
 ﻿using Hotel.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace Hotel.Models.Context
 {
-    public class HotelContext : DbContext
+    public class HotelContext : IdentityDbContext<IdentityUser>
     {
         // DbSets representing tables in the database
         public DbSet<User> Users { get; set; }
@@ -14,10 +16,14 @@ namespace Hotel.Models.Context
         public DbSet<Restaurant> Restaurants { get; set; }
         public DbSet<Dish> Dishes { get; set; }
 
-        public HotelContext(DbContextOptions options) : base(options)
+        public HotelContext(DbContextOptions<HotelContext> options) : base(options)
         {
-
         }
 
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+            
+        }
     }
 }
