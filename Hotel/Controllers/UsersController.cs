@@ -1,19 +1,21 @@
-﻿using Hotel.Services;
+﻿
+using System.Diagnostics;
+using Hotel.Services;
 using Hotel.ViewsModels;
-using Microsoft.AspNetCore.Http;
+using Hotel.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Hotel.Controllers
 {
     public class UsersController : Controller
     {
         private readonly IUserService _userService;
-        private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly SignInManager<User> _signInManager;
 
 
-        public UsersController(IUserService userService, SignInManager<IdentityUser> signInManager)
+        public UsersController(IUserService userService, SignInManager<User> signInManager)
         {
             _userService = userService;
             _signInManager = signInManager;
@@ -116,7 +118,9 @@ namespace Hotel.Controllers
         }
 
 
+
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(LoginModel model)
         {
             if (!ModelState.IsValid)
@@ -124,20 +128,31 @@ namespace Hotel.Controllers
                 return View(model);
             }
 
-            var isAuthenticated = await _userService.AuthenticateUserAsync(model);
+            // Use SignInManager directly for clearer diagnostics
+            var user = await _userService.GetUserByEmailAsync(model.Email);
 
-            if (isAuthenticated)
+            if (user == null)
             {
-                // Sign in the user using SignInManager
-                var user = new IdentityUser { UserName = model.Email, Email = model.Email };
-                await _signInManager.SignInAsync(user, isPersistent: false);
+                ModelState.AddModelError(string.Empty, "User not found");
+                return View(model);
+            }
 
+            var result = await _signInManager.PasswordSignInAsync(
+                user.UserName,
+                model.Password,
+                isPersistent: false,
+                lockoutOnFailure: false);
+
+            if (result.Succeeded)
+            {
                 return RedirectToAction("Index", "Home");
             }
 
-            ModelState.AddModelError("", "Invalid email or password");
+            ModelState.AddModelError(string.Empty, "Invalid login attempt");
             return View(model);
         }
+
+
         [HttpGet]
         public async Task<IActionResult> Logout()
         {
@@ -151,23 +166,82 @@ namespace Hotel.Controllers
             return View();
         }
 
+
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Sign(SignModel model)
         {
-            if (!ModelState.IsValid)
+            try
             {
+                // Check model validation
+                if (!ModelState.IsValid)
+                {
+                    return View(model);
+                }
+
+                // Try to parse phone number
+                int phoneNumber;
+                if (!int.TryParse(model.Phone.ToString(), out phoneNumber))
+                {
+                    ModelState.AddModelError("Phone", "Please enter a valid number without any symbols or spaces");
+                    return View(model);
+                }
+
+                // Register the user
+                var result = await _userService.RegisterUserAsync(model);
+
+                if (result)
+                {
+                    // Success
+                    TempData["SuccessMessage"] = "Registration successful! Please log in.";
+                    return RedirectToAction("Login");
+                }
+                else
+                {
+                    // If registration failed, add a general error
+                    ModelState.AddModelError("", "Registration failed. The email may already be registered or the password doesn't meet requirements.");
+                    return View(model);
+                }
+            }
+            catch (Exception ex)
+            {
+                // Log the exception
+                Console.WriteLine($"Error in Sign action: {ex.Message}");
+                ModelState.AddModelError("", "An error occurred during registration. Please try again.");
                 return View(model);
             }
-
-            var result = await _userService.RegisterUserAsync(model);
-
-            if (result)
+        }
+        [Authorize(Roles = "Admin")]
+        [HttpGet]
+        public async Task<IActionResult> Admin()
+        {
+            try
             {
-                return RedirectToAction("Login");
-            }
+                // Get counts and statistics for the dashboard
+                var users = await _userService.GetAllUsersAsync();
 
-            ModelState.AddModelError("", "Email already in use");
-            return View(model);
-        }    
+                // Create a view model for the dashboard
+                var viewModel = new AdminDashboardViewModel
+                {
+                    TotalUsers = users.Count(),
+                    RecentUsers = users.OrderByDescending(u => u.Id).Take(5).ToList(),
+
+                    // Add any other statistics you want to display
+                    // TotalBookings = await _bookingService.GetBookingCountAsync(),
+                    // TotalRooms = await _roomService.GetRoomCountAsync(),
+                    // OccupancyRate = await _bookingService.GetOccupancyRateAsync()
+                };
+
+                return View(viewModel);
+            }
+            catch (Exception ex)
+            {
+                // Log the exception
+                Console.WriteLine($"Error in Admin action: {ex.Message}");
+                return View("Error", new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            }
+        }
+
+
     }
 }

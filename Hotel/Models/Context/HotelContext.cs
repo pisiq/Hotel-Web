@@ -5,10 +5,10 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Hotel.Models.Context
 {
-    public class HotelContext : IdentityDbContext<IdentityUser>
+    public class HotelContext : IdentityDbContext<User>
     {
         // DbSets representing tables in the database
-        public DbSet<User> Users { get; set; }
+        // Note: DO NOT include Users here - it's already defined in IdentityDbContext
         public DbSet<Room> Rooms { get; set; }
         public DbSet<Location> Locations { get; set; }
         public DbSet<User_Booking> User_Bookings { get; set; }
@@ -23,7 +23,11 @@ namespace Hotel.Models.Context
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
-            
+
+            // Identity table customization if needed
+            builder.Entity<User>().ToTable("AspNetUsers");
+
+            // Other table configurations can go here
         }
     }
 }

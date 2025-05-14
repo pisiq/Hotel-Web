@@ -1,87 +1,111 @@
-﻿using Hotel.Data;
+﻿using Hotel.Models;
 using Hotel.ViewsModels;
-using System;
-using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
-using Hotel.Models;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using System;
+using System.Threading.Tasks;
 
 namespace Hotel.Services
 {
     public class UserService : IUserService
     {
-        private readonly IRepository<User> _userRepository;
+        private readonly UserManager<User> _userManager;
+        private readonly SignInManager<User> _signInManager;
         private readonly RoleManager<IdentityRole> _roleManager;
-        private readonly IPasswordHasher<User> _passwordHasher;
-
-
 
         public UserService(
-           IRepository<User> userRepository,
-           RoleManager<IdentityRole> roleManager,
-           IPasswordHasher<User> passwordHasher)
+            UserManager<User> userManager,
+            SignInManager<User> signInManager,
+            RoleManager<IdentityRole> roleManager)
         {
-            _userRepository = userRepository;
+            _userManager = userManager;
+            _signInManager = signInManager;
             _roleManager = roleManager;
-            _passwordHasher = passwordHasher;
         }
-
 
         public async Task<bool> RegisterUserAsync(SignModel model)
         {
-            if (await EmailExistsAsync(model.Email))
+            // Check if email exists
+            var existingUser = await _userManager.FindByEmailAsync(model.Email);
+            if (existingUser != null)
+            {
                 return false; // Email already in use
+            }
 
             var user = new User
             {
+                UserName = model.Email, // Required by Identity
                 Email = model.Email,
                 Name = model.Name,
                 Phone = model.Phone,
                 ProfilePicturePath = "/images/profiles/default-avatar.png"
             };
 
-            // Hash the password
-            user.PasswordHash = _passwordHasher.HashPassword(user, model.Password);
+            // Create user with Identity (handles password hashing)
+            var result = await _userManager.CreateAsync(user, model.Password);
 
-            // Ensure role exists
-            if (!await _roleManager.RoleExistsAsync("User"))
-                await _roleManager.CreateAsync(new IdentityRole("User"));
+            if (result.Succeeded)
+            {
+                // Ensure role exists
+                if (!await _roleManager.RoleExistsAsync("User"))
+                {
+                    var roleResult = await _roleManager.CreateAsync(new IdentityRole("User"));
+                    if (!roleResult.Succeeded)
+                    {
+                        // Handle role creation error
+                        return true; // Still return true since user was created
+                    }
+                }
 
-            // Save user
-            await _userRepository.AddAsync(user);
-            await _userRepository.SaveChangesAsync();
+                // Add user to role
+                var addToRoleResult = await _userManager.AddToRoleAsync(user, "User");
 
-            return true;
+                // We'll still return true even if role assignment fails
+                // because the user account was successfully created
+                return true;
+            }
+
+            return false;
         }
-
-        public async Task<bool> UpdateUserAsync(User user)
+        public async Task<IEnumerable<User>> GetAllUsersAsync()
         {
-            await _userRepository.UpdateAsync(user);
-            await _userRepository.SaveChangesAsync();
-            return true;
+            return await _userManager.Users.ToListAsync();
         }
 
         public async Task<bool> AuthenticateUserAsync(LoginModel model)
         {
-            var user = await _userRepository.GetByEmailAsync(model.Email);
+            // First find the user by email
+            var user = await _userManager.FindByEmailAsync(model.Email);
             if (user == null)
+            {
                 return false;
+            }
 
-            var result = _passwordHasher.VerifyHashedPassword(user, user.PasswordHash, model.Password);
-            return result == PasswordVerificationResult.Success;
+            // Use SignInManager to sign in the user
+            var result = await _signInManager.PasswordSignInAsync(
+                model.Email,  // username (same as email in this case)
+                model.Password,
+                isPersistent: false,
+                lockoutOnFailure: false);
+
+            return result.Succeeded;
+        }
+
+        public async Task<bool> UpdateUserAsync(User user)
+        {
+            var result = await _userManager.UpdateAsync(user);
+            return result.Succeeded;
         }
 
         public async Task<bool> EmailExistsAsync(string email)
         {
-            var user = await _userRepository.GetByEmailAsync(email);
+            var user = await _userManager.FindByEmailAsync(email);
             return user != null;
         }
 
         public async Task<User> GetUserByEmailAsync(string email)
         {
-            return await _userRepository.GetByEmailAsync(email);
+            return await _userManager.FindByEmailAsync(email);
         }
-
     }
 }

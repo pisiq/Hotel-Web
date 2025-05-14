@@ -1,0 +1,34 @@
+﻿@model Hotel.ViewsModels.AdminDashboardViewModel
+@{
+    ViewData["Title"] = "Admin Dashboard";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="hero">
+    <div class="container my-5">
+        <div class="row m-md-4">
+            <h2 class="text-center">Admin Dashboard</h2>
+        </div>
+
+        <div class="card p-4 shadow-lg default">
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100 border-primary">
+                        <div class="card-header bg-warning text-dark">
+                            <h5 class="mb-0">User Statistics</h5>
+                        </div>
+                        <div class="card-body text-center">
+                            <h2 class="display-4 mb-0">@Model.TotalUsers</h2>
+                            <p class="mt-2">Total Registered Users</p>
+                            <a href="#" class="btn btn-outline-warning mt-3">View All Users</a>
+                        </div>
+                    </div>
+                </div>
+
+                
+            </div>
+
+           
+        </div>
+    </div>
+</div>

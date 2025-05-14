@@ -1,4 +1,3 @@
-using Hotel.Data;
 using Hotel.Models;
 using Hotel.Models.Context;
 using Hotel.Services;
@@ -15,15 +14,43 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<HotelContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("BloggingDb")));
 
-// Add session support
-builder.Services.AddIdentity<IdentityUser, IdentityRole>()
-    .AddEntityFrameworkStores<HotelContext>()
-    .AddDefaultTokenProviders();
+// Configure Identity with more explicit options
+builder.Services.AddIdentity<User, IdentityRole>(options =>
+{
+    // Password settings (make them simpler for testing)
+    options.Password.RequireDigit = true;
+    options.Password.RequireLowercase = true;
+    options.Password.RequireNonAlphanumeric = false;
+    options.Password.RequireUppercase = false;
+    options.Password.RequiredLength = 6;
 
-builder.Services.AddAuthentication(IdentityConstants.ApplicationScheme)
-    .AddCookie();
+    // User settings
+    options.User.RequireUniqueEmail = true;
 
-builder.Services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
+    // Sign-in settings
+    options.SignIn.RequireConfirmedEmail = false;
+    options.SignIn.RequireConfirmedAccount = false;
+})
+.AddEntityFrameworkStores<HotelContext>()
+.AddDefaultTokenProviders();
+
+// Authentication
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = IdentityConstants.ApplicationScheme;
+    options.DefaultChallengeScheme = IdentityConstants.ApplicationScheme;
+    options.DefaultSignInScheme = IdentityConstants.ApplicationScheme;
+})
+.AddCookie(options =>
+{
+    options.Cookie.HttpOnly = true;
+    options.ExpireTimeSpan = TimeSpan.FromMinutes(60);
+    options.LoginPath = "/Users/Login";
+    options.LogoutPath = "/Users/Logout";
+    options.AccessDeniedPath = "/Users/AccessDenied";
+    options.SlidingExpiration = true;
+});
+
 builder.Services.AddDistributedMemoryCache(); // Required for session
 builder.Services.AddSession(options =>
 {
@@ -32,13 +59,73 @@ builder.Services.AddSession(options =>
     options.Cookie.IsEssential = true;
 });
 
-// Register repositories and services
-builder.Services.AddScoped<IRepository<User>, UserRepository>();
+// Register services - only register what's needed
 builder.Services.AddScoped<IUserService, UserService>();
 
 var app = builder.Build();
 
+// Seed admin user and roles
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    try
+    {
+        var userManager = services.GetRequiredService<UserManager<User>>();
+        var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
 
+        // Ensure roles exist
+        if (!await roleManager.RoleExistsAsync("Admin"))
+        {
+            await roleManager.CreateAsync(new IdentityRole("Admin"));
+        }
+
+        if (!await roleManager.RoleExistsAsync("User"))
+        {
+            await roleManager.CreateAsync(new IdentityRole("User"));
+        }
+
+        // Check if admin exists
+        var adminEmail = "admin@hotel.com";
+        var adminUser = await userManager.FindByEmailAsync(adminEmail);
+
+        if (adminUser == null)
+        {
+            // Create admin user
+            var admin = new User
+            {
+                UserName = adminEmail,
+                Email = adminEmail,
+                Name = "Admin User",
+                Phone = 1234567890,
+                EmailConfirmed = true,
+                ProfilePicturePath = "/images/profiles/default-avatar.png"
+            };
+
+            var result = await userManager.CreateAsync(admin, "Admin123!");  // Set a strong default password
+
+            if (result.Succeeded)
+            {
+                // Add admin to Admin role
+                await userManager.AddToRoleAsync(admin, "Admin");
+
+                Console.WriteLine("Admin user created successfully.");
+            }
+            else
+            {
+                var errors = string.Join(", ", result.Errors.Select(e => e.Description));
+                Console.WriteLine($"Failed to create admin user: {errors}");
+            }
+        }
+        else
+        {
+            Console.WriteLine("Admin user already exists.");
+        }
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine($"An error occurred while seeding the database: {ex.Message}");
+    }
+}
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
@@ -50,6 +137,9 @@ if (!app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
+
+// Important: Add Authentication before Authorization
+app.UseAuthentication();
 app.UseAuthorization();
 
 // Enable session
@@ -58,6 +148,5 @@ app.UseSession();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
-
 
 app.Run();

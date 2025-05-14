@@ -62,6 +62,12 @@
                                 Profile
                             </a>
                         </li>
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" asp-controller="Users" asp-action="Admin">Admin Dashboard</a>
+                            </li>
+                        }
                         <li class="nav-item"><a class="nav-link" asp-controller="Users" asp-action="Logout">Logout</a></li>
                     </ul>
                 }

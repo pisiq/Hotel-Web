@@ -7,34 +7,46 @@
 <div class="hero">
     <div class="container my-5">
         <div class="row m-md-4">
-            <h2 class="text-center">Sign in</h2>
+            <h2 class="text-center">Sign Up</h2>
         </div>
         <div class="card p-4 shadow-lg default">
             <form method="post" asp-controller="Users" asp-action="Sign">
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                @Html.AntiForgeryToken()
+                <div asp-validation-summary="All" class="text-danger"></div>
+
                 <div class="mb-3">
                     <label class="form-label" asp-for="Email"></label>
-                    <input class="form-control" asp-for="Email" placeholder="ex:Email@gmail.com" required type="text">
+                    <input class="form-control" asp-for="Email" placeholder="example@email.com">
+                    <span asp-validation-for="Email" class="text-danger"></span>
                 </div>
 
                 <div class="mb-3">
                     <label class="form-label" asp-for="Name"></label>
-                    <input class="form-control" asp-for="Name" placeholder="Ion Popescu-Andrei" required type="text">
+                    <input class="form-control" asp-for="Name" placeholder="John Doe">
+                    <span asp-validation-for="Name" class="text-danger"></span>
                 </div>
 
                 <div class="mb-3">
                     <label class="form-label" asp-for="Phone"></label>
-                    <input class="form-control" asp-for="Phone" placeholder="ex:+40 xxx xxx xxx" required type="text">
+                    <input class="form-control" asp-for="Phone" placeholder="Mobile number (digits only)">
+                    <span asp-validation-for="Phone" class="text-danger"></span>
                 </div>
 
                 <div class="mb-3">
                     <label class="form-label" asp-for="Password"></label>
-                    <input class="form-control" asp-for="Password" placeholder="Password" required type="password">
+                    <input class="form-control" asp-for="Password" placeholder="Password">
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label" asp-for="ConfirmPassword"></label>
+                    <input class="form-control" asp-for="ConfirmPassword" placeholder="Confirm Password">
+                    <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
                 </div>
 
                 <div class="mb-3">
                     <h6>Already have an account?</h6>
-                    <a class="nav-link" asp-controller="Home" asp-action="Login">Login</a>
+                    <a class="nav-link" asp-controller="Users" asp-action="Login">Login</a>
                 </div>
 
                 <button class="btn btn-warning btn-outline-danger w-100" type="submit">Sign Up</button>
@@ -42,3 +54,7 @@
         </div>
     </div>
 </div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

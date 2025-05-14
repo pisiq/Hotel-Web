@@ -11,6 +11,7 @@ namespace Hotel.Services
         Task<bool> EmailExistsAsync(string email);
         Task<User> GetUserByEmailAsync(string email);
         Task<bool> UpdateUserAsync(User user);
- 
+        Task<IEnumerable<User>> GetAllUsersAsync();
+
     }
 }

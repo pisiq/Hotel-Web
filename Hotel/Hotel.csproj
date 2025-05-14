@@ -22,11 +22,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Migrations\" />
+    <None Include="wwwroot\images\profiles\default-avatar.png" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="wwwroot\images\profiles\default-avatar.png" />
+    <Folder Include="Migrations\" />
   </ItemGroup>
 
 </Project>
