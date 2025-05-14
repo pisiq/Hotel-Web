@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Facultate\\web\\Hotel\\Hotel.csproj": {}
+    "C:\\Users\\User\\WebstormProjects\\untitled\\Hotel\\Hotel.csproj": {}
   },
   "projects": {
-    "C:\\Facultate\\web\\Hotel\\Hotel.csproj": {
+    "C:\\Users\\User\\WebstormProjects\\untitled\\Hotel\\Hotel.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Facultate\\web\\Hotel\\Hotel.csproj",
+        "projectUniqueName": "C:\\Users\\User\\WebstormProjects\\untitled\\Hotel\\Hotel.csproj",
         "projectName": "Hotel",
-        "projectPath": "C:\\Facultate\\web\\Hotel\\Hotel.csproj",
+        "projectPath": "C:\\Users\\User\\WebstormProjects\\untitled\\Hotel\\Hotel.csproj",
         "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-        "outputPath": "C:\\Facultate\\web\\Hotel\\obj\\",
+        "outputPath": "C:\\Users\\User\\WebstormProjects\\untitled\\Hotel\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

@@ -1,4 +1,20 @@
-﻿
+﻿@using Hotel.Services
+
+@inject IUserService UserService
+
+@{
+    string profilePicturePath = null;
+
+    if (User.Identity.IsAuthenticated)
+    {
+        var user = await UserService.GetUserByEmailAsync(User.Identity.Name);
+        if (user != null)
+        {
+            profilePicturePath = user.ProfilePicturePath;
+        }
+    }
+}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,6 +25,20 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/Hotel.styles.css" asp-append-version="true" />
+    <style>
+        .profile-pic-small {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 8px;
+        }
+
+        .profile-menu-item {
+            display: flex;
+            align-items: center;
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -19,7 +49,19 @@
                 {
                     <ul class="navbar-nav me-auto">
                         <li class="nav-item"><a class="nav-link" asp-controller="Home" asp-action="Index">Home</a></li>
-                        <li class="nav-item"><a class="nav-link" asp-controller="Users" asp-action="Profile">Profile</a></li>
+                        <li class="nav-item">
+                            <a class="nav-link profile-menu-item" asp-controller="Users" asp-action="Profile">
+                                @if (!string.IsNullOrEmpty(profilePicturePath))
+                                {
+                                    <img src="@Url.Content(profilePicturePath)" alt="Profile" class="profile-pic-small" />
+                                }
+                                else
+                                {
+                                    <img src="~/images/default-avatar.png" alt="Default Profile" class="profile-pic-small" />
+                                }
+                                Profile
+                            </a>
+                        </li>
                         <li class="nav-item"><a class="nav-link" asp-controller="Users" asp-action="Logout">Logout</a></li>
                     </ul>
                 }

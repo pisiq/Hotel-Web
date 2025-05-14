@@ -1,4 +1,5 @@
-﻿using Hotel.ViewsModels;
+﻿using Hotel.Models;
+using Hotel.ViewsModels;
 using System.Threading.Tasks;
 
 namespace Hotel.Services
@@ -8,5 +9,8 @@ namespace Hotel.Services
         Task<bool> RegisterUserAsync(SignModel model);
         Task<bool> AuthenticateUserAsync(LoginModel model);
         Task<bool> EmailExistsAsync(string email);
+        Task<User> GetUserByEmailAsync(string email);
+        Task<bool> UpdateUserAsync(User user);
+ 
     }
 }

@@ -16,6 +16,11 @@ namespace Hotel.ViewsModels
         [Display(Name = "Last Name")]
         public string LastName { get; set; }
 
-        // Add other properties as needed
+        // Current profile picture path
+        public string ProfilePicturePath { get; set; }
+
+        // Property for uploading a new profile picture
+        [Display(Name = "Profile Picture")]
+        public IFormFile ProfilePicture { get; set; }
     }
 }
