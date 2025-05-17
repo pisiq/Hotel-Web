@@ -127,3 +127,9 @@ wwwroot\lib\jquery-validation\LICENSE.md
 wwwroot\lib\jquery-validation-unobtrusive\dist\jquery.validate.unobtrusive.js
 wwwroot\lib\jquery-validation-unobtrusive\dist\jquery.validate.unobtrusive.min.js
 wwwroot\lib\jquery-validation-unobtrusive\LICENSE.txt
+wwwroot\room-photos\55d999f5-71ae-48e2-80de-624979ca5b13_Screenshot 2024-04-15 125738.png
+wwwroot\room-photos\682a9456-92f6-4523-8882-9e451afdcfb7_Screenshot 2024-04-18 232737.png
+wwwroot\room-photos\78bb625e-4818-4471-8015-5544bd92efe4_Screenshot 2024-04-09 172259.png
+wwwroot\room-photos\86bca21f-3fc9-46e9-b55f-622ff0c99663_Screenshot 2024-04-09 202647.png
+wwwroot\room-photos\b2eef9de-e866-4885-b3bd-5d8664fc9e67_Screenshot 2024-04-15 122256.png
+wwwroot\room-photos\d126c77f-babb-48aa-9a7c-1b4f20c467f0_Screenshot 2024-03-07 194216.png

@@ -1,34 +1,88 @@
-﻿@model Hotel.ViewsModels.AdminDashboardViewModel
+﻿model Hotel.ViewsModels.AdminDashboardViewModel
 @{
     ViewData["Title"] = "Admin Dashboard";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <div class="hero">
-    <div class="container my-5">
-        <div class="row m-md-4">
-            <h2 class="text-center">Admin Dashboard</h2>
+    <div class="container my-5 pt-5">
+        <div class="row mb-4">
+            <div class="col-12">
+                <h2 class="text-center">Admin Dashboard</h2>
+            </div>
         </div>
 
-        <div class="card p-4 shadow-lg default">
-            <div class="row">
-                <div class="col-md-4 mb-4">
-                    <div class="card h-100 border-primary">
-                        <div class="card-header bg-warning text-dark">
-                            <h5 class="mb-0">User Statistics</h5>
-                        </div>
-                        <div class="card-body text-center">
-                            <h2 class="display-4 mb-0">@Model.TotalUsers</h2>
-                            <p class="mt-2">Total Registered Users</p>
-                            <a href="#" class="btn btn-outline-warning mt-3">View All Users</a>
-                        </div>
+        @if (TempData["SuccessMessage"] != null)
+        {
+            <div class="alert alert-success alert-dismissible fade show">
+                @TempData["SuccessMessage"]
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        }
+        @if (TempData["ErrorMessage"] != null)
+        {
+            <div class="alert alert-danger alert-dismissible fade show">
+                @TempData["ErrorMessage"]
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        }
+
+        <!-- Dashboard Cards -->
+        <div class="row mb-4">
+            <!-- Users Card -->
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 border-primary shadow">
+                    <div class="card-header bg-primary text-white">
+                        <h5 class="mb-0"><i class="bi bi-people-fill me-2"></i>Users</h5>
+                    </div>
+                    <div class="card-body text-center d-flex flex-column align-items-center justify-content-center">
+                        <div class="display-1 fw-bold text-primary mb-3">@Model.TotalUsers</div>
+                        <p class="card-text">Total registered users in the system</p>
                     </div>
                 </div>
-
-                
             </div>
 
-           
+            <!-- Rooms Card -->
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 border-success shadow">
+                    <div class="card-header bg-success text-white">
+                        <h5 class="mb-0"><i class="bi bi-house-door-fill me-2"></i>Rooms</h5>
+                    </div>
+                    <div class="card-body text-center d-flex flex-column align-items-center justify-content-center">
+                        <div class="display-1 fw-bold text-success mb-3">@Model.TotalRooms</div>
+                        <p class="card-text">Total rooms available for booking</p>
+                        <a asp-controller="Room" asp-action="Index" class="btn btn-outline-success mt-3">
+                            <i class="bi bi-gear-fill me-2"></i>Manage Rooms
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Locations Card -->
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 border-warning shadow">
+                    <div class="card-header bg-warning text-dark">
+                        <h5 class="mb-0"><i class="bi bi-geo-alt-fill me-2"></i>Locations</h5>
+                    </div>
+                    <div class="card-body text-center d-flex flex-column align-items-center justify-content-center">
+                        <div class="display-1 fw-bold text-warning mb-3">@Model.TotalLocations</div>
+                        <p class="card-text">Total property locations</p>
+                        <a asp-controller="Locations" asp-action="Index" class="btn btn-outline-warning mt-3">
+                            <i class="bi bi-gear-fill me-2"></i>Manage Locations
+                        </a>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
+
+@section Scripts {
+    <script>
+        // Enable Bootstrap tooltips
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl)
+        })
+    </script>
+}

@@ -1,3 +1,4 @@
+using Hotel.Data;
 using Hotel.Models;
 using Hotel.Models.Context;
 using Hotel.Services;
@@ -61,6 +62,10 @@ builder.Services.AddSession(options =>
 
 // Register services - only register what's needed
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IRoomRepository, RoomRepository>();
+builder.Services.AddScoped<IRoomService, RoomService>();
+builder.Services.AddScoped<ILocationRepository, LocationRepository>();
+builder.Services.AddScoped<ILocationService, LocationService>();
 
 var app = builder.Build();
 

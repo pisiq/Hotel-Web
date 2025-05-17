@@ -1,0 +1,54 @@
+﻿@model Hotel.Models.Room
+
+@{
+    ViewData["Title"] = $"Room Details - {Model.Type}";
+}
+
+<div class="container mt-4">
+    <div class="mb-4">
+        <h1>@Model.Type</h1>
+        <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+        <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">Edit</a>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            @if (!string.IsNullOrEmpty(Model.MainPhotoPath))
+            {
+                    <img src="@Model.MainPhotoPath" class="img-fluid rounded mb-3" alt="@Model.Type">
+            }
+
+            <div class="row">
+                @foreach (var photo in Model.Photos.OrderBy(p => p.DisplayOrder))
+                {
+                        <div class="col-4 mb-3">
+                            <img src="@photo.FilePath" class="img-fluid rounded" alt="@photo.Caption">
+                        </div>
+                }
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <dl class="row">
+                        <dt class="col-sm-4">Type</dt>
+                        <dd class="col-sm-8">@Model.Type</dd>
+
+                        <dt class="col-sm-4">Price</dt>
+                        <dd class="col-sm-8">@Model.Price.ToString("C")</dd>
+
+                        <dt class="col-sm-4">Available Rooms</dt>
+                        <dd class="col-sm-8">@Model.RoomCount</dd>
+
+                        <dt class="col-sm-4">Location</dt>
+                        <dd class="col-sm-8">@(Model.Location?.Name ?? "N/A")</dd>
+                    </dl>
+
+                    <h4>Description</h4>
+                    <p>@Model.Description</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

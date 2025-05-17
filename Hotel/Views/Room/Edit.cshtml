@@ -1,0 +1,113 @@
+﻿@model Hotel.Models.Room
+
+@{
+    ViewData["Title"] = $"Edit Room - {Model.Type}";
+}
+
+<div class="container mt-4">
+    <h1>Edit Room</h1>
+
+    <form asp-action="Edit" enctype="multipart/form-data">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input type="hidden" asp-for="Id" />
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="mb-3">
+                    <label asp-for="Type" class="form-label"></label>
+                    <input asp-for="Type" class="form-control" />
+                    <span asp-validation-for="Type" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Price" class="form-label"></label>
+                    <input asp-for="Price" class="form-control" />
+                    <span asp-validation-for="Price" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="RoomCount" class="form-label">Available Rooms</label>
+                    <input asp-for="RoomCount" class="form-control" />
+                    <span asp-validation-for="RoomCount" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="LocationId" class="form-label">Location</label>
+                    <select asp-for="LocationId" class="form-select" asp-items="ViewBag.Locations">
+                        <option value="">-- Select Location --</option>
+                    </select>
+                    <span asp-validation-for="LocationId" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Description" class="form-label"></label>
+                    <textarea asp-for="Description" class="form-control" rows="5"></textarea>
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="mb-4">
+                    <h4>Main Photo</h4>
+                    @if (!string.IsNullOrEmpty(Model.MainPhotoPath))
+                    {
+                        <div class="mb-2">
+                            <img src="@Model.MainPhotoPath" class="img-thumbnail" style="max-height: 200px" alt="Main photo" />
+                        </div>
+                    }
+                    <input type="file" id="mainPhoto" name="mainPhoto" class="form-control" accept="image/*" />
+                    <small class="form-text text-muted">Upload a new photo to replace the current one</small>
+                </div>
+
+                <div class="mb-4">
+                    <h4>Additional Photos</h4>
+                    <div class="row mb-3">
+                        @foreach (var photo in Model.Photos.OrderBy(p => p.DisplayOrder))
+                        {
+                            <div class="col-md-4 mb-2">
+                                <div class="card h-100">
+                                    <img src="@photo.FilePath" class="card-img-top" alt="@photo.Caption" style="height: 120px; object-fit: cover;">
+                                    <div class="card-body p-2">
+                                        <p class="card-text small mb-1">@(photo.Caption ?? "No caption")</p>
+                                        <p class="small text-muted mb-1">Order: @photo.DisplayOrder</p>
+                                        <form asp-action="DeletePhoto" method="post" onsubmit="return confirm('Are you sure you want to delete this photo?');">
+                                            <input type="hidden" name="id" value="@Model.Id" />
+                                            <input type="hidden" name="photoId" value="@photo.Id" />
+                                            <button type="submit" class="btn btn-sm btn-danger w-100">Delete</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+
+                    <div class="mb-3">
+                        <input type="file" id="additionalPhotos" name="additionalPhotos" class="form-control"
+                               accept="image/*" multiple onchange="validateFileCount(this, 3)" />
+                        <small class="form-text text-muted">Add up to 3 more photos</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-4">
+            <button type="submit" class="btn btn-primary">Save</button>
+            <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+    <script>
+        function validateFileCount(input, maxCount) {
+            if (input.files.length > maxCount) {
+                alert(`You can only select up to ${maxCount} files.`);
+                input.value = '';
+            }
+        }
+    </script>
+}

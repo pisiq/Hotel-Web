@@ -22,10 +22,6 @@ namespace WebApplication1.Controllers
         {
             return View();
         }
-        public IActionResult Rooms()
-        {
-            return View();
-        }
         public IActionResult Login()
         {
             return View();

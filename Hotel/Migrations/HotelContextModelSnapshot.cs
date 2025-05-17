@@ -94,10 +94,19 @@ namespace Hotel.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("LocationId")
                         .HasColumnType("int");
 
-                    b.Property<int>("Price")
+                    b.Property<string>("MainPhotoPath")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("RoomCount")
                         .HasColumnType("int");
 
                     b.Property<string>("Type")
@@ -109,6 +118,37 @@ namespace Hotel.Migrations
                     b.HasIndex("LocationId");
 
                     b.ToTable("Rooms");
+                });
+
+            modelBuilder.Entity("Hotel.Models.RoomPhoto", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Caption")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("DisplayOrder")
+                        .HasColumnType("int");
+
+                    b.Property<string>("FilePath")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsFeatured")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("RoomId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RoomId");
+
+                    b.ToTable("RoomPhotos");
                 });
 
             modelBuilder.Entity("Hotel.Models.Room_bookings", b =>
@@ -415,6 +455,17 @@ namespace Hotel.Migrations
                     b.Navigation("Location");
                 });
 
+            modelBuilder.Entity("Hotel.Models.RoomPhoto", b =>
+                {
+                    b.HasOne("Hotel.Models.Room", "Room")
+                        .WithMany("Photos")
+                        .HasForeignKey("RoomId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Room");
+                });
+
             modelBuilder.Entity("Hotel.Models.Room_bookings", b =>
                 {
                     b.HasOne("Hotel.Models.Room", "Room")
@@ -499,6 +550,11 @@ namespace Hotel.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("Hotel.Models.Room", b =>
+                {
+                    b.Navigation("Photos");
                 });
 
             modelBuilder.Entity("Hotel.Models.Room_bookings", b =>

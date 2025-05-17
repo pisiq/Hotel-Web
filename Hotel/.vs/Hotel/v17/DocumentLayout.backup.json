@@ -1,17 +1,17 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Facultate\\web\\Hotel\\",
+  "WorkspaceRootPath": "C:\\Users\\User\\WebstormProjects\\untitled\\Hotel\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{01ED1622-C8EA-46E7-8972-03A600689606}|Hotel.csproj|c:\\facultate\\web\\hotel\\controllers\\userscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{01ED1622-C8EA-46E7-8972-03A600689606}|Hotel.csproj|solutionrelative:controllers\\userscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{01ED1622-C8EA-46E7-8972-03A600689606}|Hotel.csproj|c:\\facultate\\web\\hotel\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "AbsoluteMoniker": "D:0:0:{01ED1622-C8EA-46E7-8972-03A600689606}|Hotel.csproj|c:\\users\\user\\webstormprojects\\untitled\\hotel\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{01ED1622-C8EA-46E7-8972-03A600689606}|Hotel.csproj|solutionrelative:views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{01ED1622-C8EA-46E7-8972-03A600689606}|Hotel.csproj|c:\\facultate\\web\\hotel\\views\\shared\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "AbsoluteMoniker": "D:0:0:{01ED1622-C8EA-46E7-8972-03A600689606}|Hotel.csproj|c:\\users\\user\\webstormprojects\\untitled\\hotel\\controllers\\userscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{01ED1622-C8EA-46E7-8972-03A600689606}|Hotel.csproj|solutionrelative:controllers\\userscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{01ED1622-C8EA-46E7-8972-03A600689606}|Hotel.csproj|c:\\users\\user\\webstormprojects\\untitled\\hotel\\views\\shared\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{01ED1622-C8EA-46E7-8972-03A600689606}|Hotel.csproj|solutionrelative:views\\shared\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     }
   ],
@@ -36,15 +36,15 @@
         },
         {
           "DockedWidth": 256,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Document",
               "DocumentIndex": 2,
               "Title": "Login.cshtml",
-              "DocumentMoniker": "C:\\Facultate\\web\\Hotel\\Views\\Shared\\Login.cshtml",
+              "DocumentMoniker": "C:\\Users\\User\\WebstormProjects\\untitled\\Hotel\\Views\\Shared\\Login.cshtml",
               "RelativeDocumentMoniker": "Views\\Shared\\Login.cshtml",
-              "ToolTip": "C:\\Facultate\\web\\Hotel\\Views\\Shared\\Login.cshtml",
+              "ToolTip": "C:\\Users\\User\\WebstormProjects\\untitled\\Hotel\\Views\\Shared\\Login.cshtml",
               "RelativeToolTip": "Views\\Shared\\Login.cshtml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
@@ -53,24 +53,23 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "UsersController.cs",
-              "DocumentMoniker": "C:\\Facultate\\web\\Hotel\\Controllers\\UsersController.cs",
+              "DocumentMoniker": "C:\\Users\\User\\WebstormProjects\\untitled\\Hotel\\Controllers\\UsersController.cs",
               "RelativeDocumentMoniker": "Controllers\\UsersController.cs",
-              "ToolTip": "C:\\Facultate\\web\\Hotel\\Controllers\\UsersController.cs",
+              "ToolTip": "C:\\Users\\User\\WebstormProjects\\untitled\\Hotel\\Controllers\\UsersController.cs",
               "RelativeToolTip": "Controllers\\UsersController.cs",
               "ViewState": "AgIAABsAAAAAAAAAAADwvy8AAAAfAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-10T13:40:36.314Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-10T13:40:36.314Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "_Layout.cshtml",
-              "DocumentMoniker": "C:\\Facultate\\web\\Hotel\\Views\\Shared\\_Layout.cshtml",
+              "DocumentMoniker": "C:\\Users\\User\\WebstormProjects\\untitled\\Hotel\\Views\\Shared\\_Layout.cshtml",
               "RelativeDocumentMoniker": "Views\\Shared\\_Layout.cshtml",
-              "ToolTip": "C:\\Facultate\\web\\Hotel\\Views\\Shared\\_Layout.cshtml",
+              "ToolTip": "C:\\Users\\User\\WebstormProjects\\untitled\\Hotel\\Views\\Shared\\_Layout.cshtml",
               "RelativeToolTip": "Views\\Shared\\_Layout.cshtml",
               "ViewState": "AgIAAAkAAAAAAAAAAAAswC8AAAAOAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",

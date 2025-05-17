@@ -13,12 +13,19 @@ namespace Hotel.Controllers
     {
         private readonly IUserService _userService;
         private readonly SignInManager<User> _signInManager;
+        private readonly IRoomService _roomService;
+        private readonly ILocationService _locationService;
 
-
-        public UsersController(IUserService userService, SignInManager<User> signInManager)
+        public UsersController(
+            IUserService userService,
+            SignInManager<User> signInManager,
+            IRoomService roomService,
+            ILocationService locationService)
         {
             _userService = userService;
             _signInManager = signInManager;
+            _roomService = roomService;
+            _locationService = locationService;
         }
 
         [HttpGet]
@@ -217,31 +224,30 @@ namespace Hotel.Controllers
         {
             try
             {
-                // Get counts and statistics for the dashboard
                 var users = await _userService.GetAllUsersAsync();
+                var rooms = await _roomService.GetAllRoomsAsync();
+                var locations = await _locationService.GetAllLocationsAsync();
 
-                // Create a view model for the dashboard
                 var viewModel = new AdminDashboardViewModel
                 {
                     TotalUsers = users.Count(),
+                    TotalRooms = rooms.Count(),
+                    TotalLocations = locations.Count(),
                     RecentUsers = users.OrderByDescending(u => u.Id).Take(5).ToList(),
-
-                    // Add any other statistics you want to display
-                    // TotalBookings = await _bookingService.GetBookingCountAsync(),
-                    // TotalRooms = await _roomService.GetRoomCountAsync(),
-                    // OccupancyRate = await _bookingService.GetOccupancyRateAsync()
+                    Rooms = rooms.ToList(),
+                    Locations = locations.ToList(),
+                    Room = new Room(),
+                    Location = new Location()
                 };
 
                 return View(viewModel);
             }
             catch (Exception ex)
             {
-                // Log the exception
                 Console.WriteLine($"Error in Admin action: {ex.Message}");
                 return View("Error", new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
             }
         }
-
 
     }
 }

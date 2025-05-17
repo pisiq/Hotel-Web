@@ -10,6 +10,7 @@ namespace Hotel.Models.Context
         // DbSets representing tables in the database
         // Note: DO NOT include Users here - it's already defined in IdentityDbContext
         public DbSet<Room> Rooms { get; set; }
+        public DbSet<RoomPhoto> RoomPhotos { get; set; }
         public DbSet<Location> Locations { get; set; }
         public DbSet<User_Booking> User_Bookings { get; set; }
         public DbSet<Room_bookings> Room_Bookings { get; set; }
