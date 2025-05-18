@@ -11,6 +11,8 @@ namespace Hotel.ViewsModels
         public int TotalRooms { get; set; }
         public int TotalLocations { get; set; }
         public int TotalBookings { get; set; }
+        public int TotalDishes { get; set; }
+        public int TotalRestaurants { get; set; }
         public IEnumerable<User> RecentUsers { get; set; }
         public List<Room> Rooms { get; set; } = new List<Room>();
         public List<Location> Locations { get; set; } = new List<Location>();

@@ -16,19 +16,25 @@ namespace Hotel.Controllers
         private readonly IRoomService _roomService;
         private readonly ILocationService _locationService;
         private readonly IBookingService _bookingService;
+        private readonly IDishService _dishService; 
+        private readonly IRestaurantService _restaurantService;
 
         public UsersController(
             IUserService userService,
             SignInManager<User> signInManager,
             IRoomService roomService,
             ILocationService locationService,
-            IBookingService bookingService)
+            IBookingService bookingService,
+            IDishService dishService,
+            IRestaurantService restaurantService) // Add this parameter
         {
             _userService = userService;
             _signInManager = signInManager;
             _roomService = roomService;
             _locationService = locationService;
             _bookingService = bookingService;
+            _dishService = dishService; // Add this line
+            _restaurantService = restaurantService;
         }
 
 
@@ -236,14 +242,18 @@ namespace Hotel.Controllers
                 var users = await _userService.GetAllUsersAsync();
                 var rooms = await _roomService.GetAllRoomsAsync();
                 var locations = await _locationService.GetAllLocationsAsync();
-                var bookings = await _bookingService.GetAllBookingsAsync(); // Add this line
+                var bookings = await _bookingService.GetAllBookingsAsync();
+                var dishes = await _dishService.GetAllDishesAsync();
+                var restaurants = await _restaurantService.GetAllRestaurantsAsync(); // Add this line
 
                 var viewModel = new AdminDashboardViewModel
                 {
                     TotalUsers = users.Count(),
                     TotalRooms = rooms.Count(),
                     TotalLocations = locations.Count(),
-                    TotalBookings = bookings.Count(), // Add this line
+                    TotalBookings = bookings.Count(),
+                    TotalDishes = dishes.Count(),
+                    TotalRestaurants = restaurants.Count(), // Add this line
                     RecentUsers = users.OrderByDescending(u => u.Id).Take(5).ToList(),
                     Rooms = rooms.ToList(),
                     Locations = locations.ToList(),

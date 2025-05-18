@@ -15,6 +15,8 @@ namespace Hotel.Models.Context
         public DbSet<Booking> Bookings { get; set; }
         public DbSet<Restaurant> Restaurants { get; set; }
         public DbSet<Dish> Dishes { get; set; }
+        public DbSet<About> About { get; set; }
+        public DbSet<ContactSettings> ContactSettings { get; set; }
 
         public HotelContext(DbContextOptions<HotelContext> options) : base(options)
         {
