@@ -1,0 +1,141 @@
+﻿@model Hotel.ViewsModels.BookingViewModel
+
+@{
+    ViewData["Title"] = "Book a Room";
+}
+<div class="hero">
+
+
+<div class="container mt-5 pt-4">
+    <h1>Book a Room</h1>
+
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card shadow mb-4">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0">Room Details</h5>
+                </div>
+                <div class="card-body">
+                    <h3>@Model.RoomType</h3>
+                    <p>
+                        <strong>Price:</strong> @Model.RoomPrice.ToString("C") per night<br />
+                        <strong>Location:</strong> @Model.LocationName
+                    </p>
+                </div>
+            </div>
+
+            <form asp-action="Create" method="post">
+                <input type="hidden" asp-for="RoomId" />
+
+                <div class="card shadow mb-4">
+                    <div class="card-header bg-primary text-white">
+                        <h5 class="mb-0">Select Dates</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label asp-for="CheckInDate" class="form-label"></label>
+                                <input asp-for="CheckInDate" class="form-control" type="date" 
+                                       min="@DateTime.Today.ToString("yyyy-MM-dd")" />
+                                <span asp-validation-for="CheckInDate" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-6">
+                                <label asp-for="CheckOutDate" class="form-label"></label>
+                                <input asp-for="CheckOutDate" class="form-control" type="date" 
+                                       min="@DateTime.Today.AddDays(1).ToString("yyyy-MM-dd")" />
+                                <span asp-validation-for="CheckOutDate" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="alert alert-info">
+                            <div class="d-flex justify-content-between">
+                                <span>Total nights:</span>
+                                <span id="totalNights">@Model.NumberOfNights</span>
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <span>Total price:</span>
+                                <span id="totalPrice" class="fw-bold">@Model.TotalPrice.ToString("C")</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <button type="submit" class="btn btn-primary">Confirm Booking</button>
+                    <a asp-controller="Room" asp-action="Details" asp-route-id="@Model.RoomId" class="btn btn-outline-secondary">Cancel</a>
+                </div>
+            </form>
+        </div>
+
+        <div class="col-md-6">
+            <div class="alert alert-warning">
+                <h5><i class="bi bi-info-circle"></i> Booking Information</h5>
+                <ul>
+                    <li>Check-in time is after 2:00 PM</li>
+                    <li>Check-out time is before 12:00 PM</li>
+                    <li>A valid ID will be required at check-in</li>
+                    <li>Bookings can be cancelled up to 24 hours before check-in</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const checkInInput = document.getElementById('CheckInDate');
+                const checkOutInput = document.getElementById('CheckOutDate');
+                const totalNightsElement = document.getElementById('totalNights');
+                const totalPriceElement = document.getElementById('totalPrice');
+                const roomPrice = @Json.Serialize(Model.RoomPrice);
+
+                // Update totals when dates change
+                function updateTotals() {
+                    if (checkInInput.value && checkOutInput.value) {
+                        const checkIn = new Date(checkInInput.value);
+                        const checkOut = new Date(checkOutInput.value);
+
+                        // Calculate nights
+                        const diffTime = checkOut.getTime() - checkIn.getTime();
+                        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+                        // Update display
+                        totalNightsElement.textContent = diffDays > 0 ? diffDays : 0;
+
+                        // Calculate total price
+                        const totalPrice = diffDays * roomPrice;
+                        totalPriceElement.textContent = new Intl.NumberFormat('en-US', { 
+                            style: 'currency', 
+                            currency: 'USD' 
+                        }).format(totalPrice > 0 ? totalPrice : 0);
+                    }
+                }
+
+                // Add event listeners
+                checkInInput.addEventListener('change', function() {
+                    // Set minimum check-out date to be the day after check-in
+                    const checkInDate = new Date(this.value);
+                    checkInDate.setDate(checkInDate.getDate() + 1);
+                    const minCheckOutDate = checkInDate.toISOString().split('T')[0];
+                    checkOutInput.min = minCheckOutDate;
+
+                    // If check-out date is before new check-in date, reset it
+                    if (checkOutInput.value && new Date(checkOutInput.value) <= new Date(this.value)) {
+                        checkOutInput.value = minCheckOutDate;
+                    }
+
+                    updateTotals();
+                });
+
+                checkOutInput.addEventListener('change', updateTotals);
+            });
+        </script>
+}

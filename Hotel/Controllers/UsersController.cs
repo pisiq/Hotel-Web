@@ -15,18 +15,22 @@ namespace Hotel.Controllers
         private readonly SignInManager<User> _signInManager;
         private readonly IRoomService _roomService;
         private readonly ILocationService _locationService;
+        private readonly IBookingService _bookingService;
 
         public UsersController(
             IUserService userService,
             SignInManager<User> signInManager,
             IRoomService roomService,
-            ILocationService locationService)
+            ILocationService locationService,
+            IBookingService bookingService)
         {
             _userService = userService;
             _signInManager = signInManager;
             _roomService = roomService;
             _locationService = locationService;
+            _bookingService = bookingService;
         }
+
 
         [HttpGet]
         public IActionResult Login()
@@ -96,6 +100,7 @@ namespace Hotel.Controllers
         }
 
         [HttpGet]
+        [Authorize] // Add this attribute to ensure only logged-in users can access their profile
         public async Task<IActionResult> Profile()
         {
             // Get the current user's email from claims
@@ -112,13 +117,17 @@ namespace Hotel.Controllers
                 return NotFound();
             }
 
+            // Get the user's bookings
+            var bookings = await _bookingService.GetUserBookingsAsync(user.Id);
+
             // Map user data to ProfileViewModel
             var viewModel = new ProfileViewModel
             {
                 Email = user.Email,
                 FirstName = user.Name?.Split(' ').FirstOrDefault() ?? "",
                 LastName = user.Name?.Split(' ').Skip(1).FirstOrDefault() ?? "",
-                ProfilePicturePath = user.ProfilePicturePath
+                ProfilePicturePath = user.ProfilePicturePath,
+                Bookings = bookings
             };
 
             return View(viewModel);
@@ -227,12 +236,14 @@ namespace Hotel.Controllers
                 var users = await _userService.GetAllUsersAsync();
                 var rooms = await _roomService.GetAllRoomsAsync();
                 var locations = await _locationService.GetAllLocationsAsync();
+                var bookings = await _bookingService.GetAllBookingsAsync(); // Add this line
 
                 var viewModel = new AdminDashboardViewModel
                 {
                     TotalUsers = users.Count(),
                     TotalRooms = rooms.Count(),
                     TotalLocations = locations.Count(),
+                    TotalBookings = bookings.Count(), // Add this line
                     RecentUsers = users.OrderByDescending(u => u.Id).Take(5).ToList(),
                     Rooms = rooms.ToList(),
                     Locations = locations.ToList(),
@@ -248,6 +259,5 @@ namespace Hotel.Controllers
                 return View("Error", new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
             }
         }
-
     }
 }

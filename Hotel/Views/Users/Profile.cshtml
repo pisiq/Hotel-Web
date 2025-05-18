@@ -4,42 +4,301 @@
 }
 
 <div class="hero">
-    <div class="container my-5">
-        <div class="row m-md-4">
-            <h2 class="text-center">User Profile</h2>
-        </div>
-        <div class="card p-4 shadow-lg default">
-            <div class="row">
-                <div class="col-md-4 text-center mb-3">
-                    @if (!string.IsNullOrEmpty(Model.ProfilePicturePath))
-                    {
-                        <img src="@Url.Content(Model.ProfilePicturePath)" alt="Profile Picture" class="img-fluid rounded-circle" style="max-width: 200px;" />
-                    }
-                    else
-                    {
-                        <img src="~/images/default-profile.png" alt="Default Profile" class="img-fluid rounded-circle" style="max-width: 200px;" />
-                    }
+    <div class="container my-5 pt-5">
+        <!-- Success/Error messages -->
+        @if (TempData["SuccessMessage"] != null)
+        {
+            <div class="alert alert-success alert-dismissible fade show">
+                @TempData["SuccessMessage"]
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        }
 
-                    <form asp-action="UploadProfilePicture" method="post" enctype="multipart/form-data" class="mt-3">
-                        <div class="form-group">
-                            <label asp-for="ProfilePicture" class="sr-only"></label>
-                            <input asp-for="ProfilePicture" type="file" class="form-control-file" accept="image/*" />
-                            <span asp-validation-for="ProfilePicture" class="text-danger"></span>
+        @if (TempData["ErrorMessage"] != null)
+        {
+            <div class="alert alert-danger alert-dismissible fade show">
+                @TempData["ErrorMessage"]
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        }
+
+        <!-- Profile Information -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="card shadow">
+                    <div class="card-header bg-primary text-white">
+                        <h3 class="mb-0">My Profile</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-4 text-center mb-3">
+                                @if (!string.IsNullOrEmpty(Model.ProfilePicturePath))
+                                {
+                                    <img src="@Url.Content(Model.ProfilePicturePath)" alt="Profile Picture" class="img-fluid rounded-circle" style="max-width: 200px; max-height: 200px; object-fit: cover;" />
+                                }
+                                else
+                                {
+                                    <img src="~/images/default-avatar.png" alt="Default Profile" class="img-fluid rounded-circle" style="max-width: 200px;" />
+                                }
+
+                                <form asp-action="UploadProfilePicture" method="post" enctype="multipart/form-data" class="mt-3">
+                                    <div class="form-group">
+                                        <label asp-for="ProfilePicture" class="form-label">Update profile picture</label>
+                                        <input asp-for="ProfilePicture" type="file" class="form-control" accept="image/*" />
+                                        <span asp-validation-for="ProfilePicture" class="text-danger"></span>
+                                    </div>
+                                    <button type="submit" class="btn btn-sm btn-primary mt-2">Update Picture</button>
+                                </form>
+                            </div>
+                            <div class="col-md-8">
+                                <h4>Welcome, @Model.FirstName @Model.LastName!</h4>
+                                <hr />
+                                <dl class="row">
+                                    <dt class="col-sm-3">Email:</dt>
+                                    <dd class="col-sm-9">@Model.Email</dd>
+                                </dl>
+
+                                <div class="mt-4">
+                                    <a class="btn btn-warning" asp-controller="Users" asp-action="Logout">
+                                        <i class="bi bi-box-arrow-right me-2"></i>Logout
+                                    </a>
+                                </div>
+                            </div>
                         </div>
-                        <button type="submit" class="btn btn-sm btn-primary mt-2">Update Picture</button>
-                    </form>
+                    </div>
                 </div>
-                <div class="col-md-8">
-                    <div class="mb-3">
-                        <h4>Welcome, @Model.FirstName @Model.LastName!</h4>
+            </div>
+        </div>
+
+        <!-- Bookings Section -->
+        <div class="row">
+            <div class="col-12">
+                <div class="card shadow">
+                    <div class="card-header bg-info text-white">
+                        <h3 class="mb-0">My Bookings</h3>
                     </div>
-                    <div class="mb-3">
-                        <p><strong>Email:</strong> @Model.Email</p>
-                        <!-- Add more profile information as needed -->
+                    <div class="card-body">
+                        <!-- Navigation tabs for different booking types -->
+                        <ul class="nav nav-tabs mb-4" id="bookingTabs" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" id="active-tab" data-bs-toggle="tab" href="#active" role="tab">
+                                    Active Bookings
+                                    @if (Model.ActiveBookings.Any())
+                                    {
+                                        <span class="badge bg-primary ms-1">@Model.ActiveBookings.Count()</span>
+                                    }
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="past-tab" data-bs-toggle="tab" href="#past" role="tab">
+                                    Past Bookings
+                                    @if (Model.PastBookings.Any())
+                                    {
+                                        <span class="badge bg-secondary ms-1">@Model.PastBookings.Count()</span>
+                                    }
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="cancelled-tab" data-bs-toggle="tab" href="#cancelled" role="tab">
+                                    Cancelled Bookings
+                                    @if (Model.CancelledBookings.Any())
+                                    {
+                                        <span class="badge bg-danger ms-1">@Model.CancelledBookings.Count()</span>
+                                    }
+                                </a>
+                            </li>
+                        </ul>
+
+                        <!-- Tab Content -->
+                        <div class="tab-content">
+                            <!-- Active Bookings -->
+                            <div class="tab-pane fade show active" id="active" role="tabpanel">
+                                @if (!Model.ActiveBookings.Any())
+                                {
+                                    <div class="alert alert-info">
+                                        <i class="bi bi-info-circle me-2"></i>
+                                        You don't have any active bookings.
+                                        <a asp-controller="Room" asp-action="AllRooms" class="alert-link">Browse rooms</a> to make a booking.
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="table-responsive">
+                                        <table class="table table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th>Room</th>
+                                                    <th>Location</th>
+                                                    <th>Check-in</th>
+                                                    <th>Check-out</th>
+                                                    <th>Status</th>
+                                                    <th>Actions</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach (var booking in Model.ActiveBookings)
+                                                {
+                                                    <tr>
+                                                        <td>@booking.Room.Type</td>
+                                                        <td>@booking.Room.Location.Name</td>
+                                                        <td>@booking.CheckInDate.ToString("MMM dd, yyyy")</td>
+                                                        <td>@booking.CheckOutDate.ToString("MMM dd, yyyy")</td>
+                                                        <td><span class="badge bg-success">Active</span></td>
+                                                        <td>
+                                                            <div class="btn-group">
+                                                                <a asp-controller="Room" asp-action="Details" asp-route-id="@booking.RoomId" class="btn btn-sm btn-outline-primary">
+                                                                    <i class="bi bi-info-circle"></i> Room Details
+                                                                </a>
+                                                                <button type="button" class="btn btn-sm btn-outline-danger"
+                                                                        data-bs-toggle="modal" data-bs-target="#cancelModal"
+                                                                        data-booking-id="@booking.Id"
+                                                                        data-room-type="@booking.Room.Type">
+                                                                    <i class="bi bi-x-circle"></i> Cancel
+                                                                </button>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                }
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                }
+                            </div>
+
+                            <!-- Past Bookings -->
+                            <div class="tab-pane fade" id="past" role="tabpanel">
+                                @if (!Model.PastBookings.Any())
+                                {
+                                    <div class="alert alert-info">
+                                        <i class="bi bi-info-circle me-2"></i>
+                                        You don't have any past bookings.
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="table-responsive">
+                                        <table class="table table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th>Room</th>
+                                                    <th>Location</th>
+                                                    <th>Check-in</th>
+                                                    <th>Check-out</th>
+                                                    <th>Actions</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach (var booking in Model.PastBookings)
+                                                {
+                                                    <tr>
+                                                        <td>@booking.Room.Type</td>
+                                                        <td>@booking.Room.Location.Name</td>
+                                                        <td>@booking.CheckInDate.ToString("MMM dd, yyyy")</td>
+                                                        <td>@booking.CheckOutDate.ToString("MMM dd, yyyy")</td>
+                                                        <td>
+                                                            <a asp-controller="Room" asp-action="Details" asp-route-id="@booking.RoomId" class="btn btn-sm btn-outline-secondary">
+                                                                <i class="bi bi-info-circle"></i> Room Details
+                                                            </a>
+                                                        </td>
+                                                    </tr>
+                                                }
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                }
+                            </div>
+
+                            <!-- Cancelled Bookings -->
+                            <div class="tab-pane fade" id="cancelled" role="tabpanel">
+                                @if (!Model.CancelledBookings.Any())
+                                {
+                                    <div class="alert alert-info">
+                                        <i class="bi bi-info-circle me-2"></i>
+                                        You don't have any cancelled bookings.
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="table-responsive">
+                                        <table class="table table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th>Room</th>
+                                                    <th>Location</th>
+                                                    <th>Check-in</th>
+                                                    <th>Check-out</th>
+                                                    <th>Booking Date</th>
+                                                    <th>Actions</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach (var booking in Model.CancelledBookings)
+                                                {
+                                                    <tr>
+                                                        <td>@booking.Room.Type</td>
+                                                        <td>@booking.Room.Location.Name</td>
+                                                        <td>@booking.CheckInDate.ToString("MMM dd, yyyy")</td>
+                                                        <td>@booking.CheckOutDate.ToString("MMM dd, yyyy")</td>
+                                                        <td>@booking.BookingDate.ToString("MMM dd, yyyy HH:mm")</td>
+                                                        <td>
+                                                            <a asp-controller="Room" asp-action="Details" asp-route-id="@booking.RoomId" class="btn btn-sm btn-outline-secondary">
+                                                                <i class="bi bi-info-circle"></i> Room Details
+                                                            </a>
+                                                        </td>
+                                                    </tr>
+                                                }
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                }
+                            </div>
+                        </div>
                     </div>
-                    <a class="btn btn-warning btn-outline-danger" asp-controller="Users" asp-action="Logout">Logout</a>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+<!-- Cancel Booking Modal -->
+<div class="modal fade" id="cancelModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-danger text-white">
+                <h5 class="modal-title">Cancel Booking</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to cancel your booking for <strong><span id="roomTypeToCancel"></span></strong>?</p>
+                <p class="text-danger"><i class="bi bi-exclamation-triangle-fill me-2"></i>This action cannot be undone.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Keep Booking</button>
+                <form asp-controller="Booking" asp-action="Cancel" method="post">
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" id="bookingIdToCancel" name="id" value="" />
+                    <button type="submit" class="btn btn-danger">Yes, Cancel Booking</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Handle cancel modal
+            var cancelModal = document.getElementById('cancelModal');
+            if (cancelModal) {
+                cancelModal.addEventListener('show.bs.modal', function(event) {
+                    var button = event.relatedTarget;
+                    var bookingId = button.getAttribute('data-booking-id');
+                    var roomType = button.getAttribute('data-room-type');
+
+                    document.getElementById('bookingIdToCancel').value = bookingId;
+                    document.getElementById('roomTypeToCancel').textContent = roomType;
+                });
+            }
+        });
+    </script>
+}

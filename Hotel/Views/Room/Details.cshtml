@@ -3,12 +3,15 @@
 @{
     ViewData["Title"] = $"Room Details - {Model.Type}";
 }
-
+<div class="hero">
 <div class="container mt-4">
     <div class="mb-4">
         <h1>@Model.Type</h1>
         <a asp-action="Index" class="btn btn-secondary">Back to List</a>
-        <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">Edit</a>
+		@if (User.IsInRole("Admin"))
+		{
+            <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">Edit</a>
+		}
     </div>
 
     <div class="row">
@@ -34,15 +37,20 @@
                     <dl class="row">
                         <dt class="col-sm-4">Type</dt>
                         <dd class="col-sm-8">@Model.Type</dd>
-
-                        <dt class="col-sm-4">Price</dt>
-                        <dd class="col-sm-8">@Model.Price.ToString("C")</dd>
-
-                        <dt class="col-sm-4">Available Rooms</dt>
-                        <dd class="col-sm-8">@Model.RoomCount</dd>
-
                         <dt class="col-sm-4">Location</dt>
                         <dd class="col-sm-8">@(Model.Location?.Name ?? "N/A")</dd>
+                        <p class="fw-bold">@Model.Price.ToString("C") <span class="text-muted fw-normal">per night</span></p>
+                        <div class="d-grid gap-2">
+                            @if (Model.RoomCount > 0)
+                            {
+                                <a asp-controller="Booking" asp-action="Create" asp-route-roomId="@Model.Id" class="btn btn-primary">
+                                    Book Now
+                                </a>
+                            }
+                            else
+                            {
+                                <button class="btn btn-secondary" disabled>No Availability</button>
+                            }
                     </dl>
 
                     <h4>Description</h4>
@@ -51,4 +59,5 @@
             </div>
         </div>
     </div>
+</div>
 </div>

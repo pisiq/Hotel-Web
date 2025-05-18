@@ -1,5 +1,6 @@
 ﻿using Hotel.Models;
 using Hotel.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Threading.Tasks;
@@ -18,6 +19,7 @@ namespace Hotel.Controllers
         }
 
         // GET: Room
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Index()
         {
             var rooms = await _roomService.GetAllRoomsWithDetailsAsync();
@@ -37,6 +39,7 @@ namespace Hotel.Controllers
         }
 
         // GET: Room/Create
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Create()
         {
             await PopulateLocationDropdown();
@@ -45,6 +48,7 @@ namespace Hotel.Controllers
 
         // POST: Room/Create
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(RoomViewModel viewModel)
         {
@@ -69,6 +73,7 @@ namespace Hotel.Controllers
 
 
         // GET: Room/Edit/5
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(int id)
         {
             var room = await _roomService.GetRoomByIdWithDetailsAsync(id);
@@ -84,6 +89,7 @@ namespace Hotel.Controllers
         // POST: Room/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(int id, Room room, IFormFile? mainPhoto, List<IFormFile>? additionalPhotos)
         {
             if (id != room.Id)
@@ -107,6 +113,7 @@ namespace Hotel.Controllers
         }
 
         // GET: Room/Delete/5
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(int id)
         {
             var room = await _roomService.GetRoomByIdWithDetailsAsync(id);
@@ -120,6 +127,7 @@ namespace Hotel.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             try
@@ -145,6 +153,7 @@ namespace Hotel.Controllers
         // POST: Room/DeletePhoto
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeletePhoto(int id, int photoId)
         {
             await _roomService.DeleteRoomPhotoAsync(photoId);
@@ -155,6 +164,12 @@ namespace Hotel.Controllers
         {
             var locations = await _locationService.GetAllLocationsAsync();
             ViewBag.Locations = new SelectList(locations, "Id", "Name");
+        }
+
+        public async Task<IActionResult> AllRooms()
+        {
+            var rooms = await _roomService.GetAllRoomsWithDetailsAsync();
+            return View(rooms);
         }
     }
 }

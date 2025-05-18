@@ -12,8 +12,7 @@ namespace Hotel.Models.Context
         public DbSet<Room> Rooms { get; set; }
         public DbSet<RoomPhoto> RoomPhotos { get; set; }
         public DbSet<Location> Locations { get; set; }
-        public DbSet<User_Booking> User_Bookings { get; set; }
-        public DbSet<Room_bookings> Room_Bookings { get; set; }
+        public DbSet<Booking> Bookings { get; set; }
         public DbSet<Restaurant> Restaurants { get; set; }
         public DbSet<Dish> Dishes { get; set; }
 

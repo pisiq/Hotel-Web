@@ -1,0 +1,120 @@
+﻿@model IEnumerable<Hotel.Models.Booking>
+
+@{
+    ViewData["Title"] = "All Bookings";
+}
+<div class="hero">
+	
+
+<div class="container mt-5 pt-4">
+    <h1>All Bookings</h1>
+
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show">
+            @TempData["SuccessMessage"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="alert alert-danger alert-dismissible fade show">
+            @TempData["ErrorMessage"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+
+    <ul class="nav nav-tabs mb-4" id="bookingTabs" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active" id="active-tab" data-bs-toggle="tab" href="#active" role="tab">Bookings</a>
+        </li>
+        
+    </ul>
+
+    <div class="tab-content">
+        <!-- Bookings Tab -->
+        <div class="tab-pane fade show active" id="active" role="tabpanel">
+            <div class="card shadow mb-4">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0">Active Bookings</h5>
+                </div>
+                <div class="card-body p-0">
+                    @if (!Model.Any(b => b.CheckOutDate >= DateTime.Today))
+                    {
+                        <div class="p-3">No active bookings found.</div>
+                    }
+                    else
+                    {
+                        <div class="table-responsive">
+                            <table class="table table-hover mb-0">
+                                <thead>
+                                    <tr>
+                                        <th>Guest</th>
+                                        <th>Phone</th>
+                                        <th>Email</th>
+                                        <th>Room</th>
+                                        <th>Location</th>
+                                        <th>Check-in</th>
+                                        <th>Check-out</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var booking in Model.Where(b =>  b.CheckOutDate >= DateTime.Today).OrderBy(b => b.CheckInDate))
+                                    {
+                                        <tr>
+                                            <td>@booking.User.Name</td>
+                                            <td>@booking.User.Phone</td>
+                                            <td>@booking.User.Email</td>
+                                            <td>@booking.Room.Type</td>
+                                            <td>@booking.Room.Location.Name</td>
+                                            <td>@booking.CheckInDate.ToString("MMM dd, yyyy")</td>
+                                            <td>@booking.CheckOutDate.ToString("MMM dd, yyyy")</td>
+                                            <td>
+                                                @if (booking.Status == BookingStatus.Confirmed)
+                                                {
+                                                    <span class="badge bg-success">Active</span>
+                                                }
+                                                else if (booking.Status == BookingStatus.Cancelled)
+                                                {
+                                                    <span class="badge bg-danger">Cancelled</span>
+                                                }
+                                                else
+                                                {
+                                                    <span class="badge bg-secondary">Completed</span>
+                                                }
+                                            </td>
+                                            
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+@section Scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var cancelModal = document.getElementById('cancelModal');
+            if (cancelModal) {
+                cancelModal.addEventListener('show.bs.modal', function(event) {
+                    var button = event.relatedTarget;
+                    var bookingId = button.getAttribute('data-booking-id');
+                    var guest = button.getAttribute('data-guest');
+                    var room = button.getAttribute('data-room');
+
+                    document.getElementById('bookingIdToCancel').value = bookingId;
+                    document.getElementById('guestName').textContent = guest;
+                    document.getElementById('roomType').textContent = room;
+                });
+            }
+        });
+    </script>
+}
