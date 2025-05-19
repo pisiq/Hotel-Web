@@ -8,7 +8,12 @@
 
 <div class="container mt-5 pt-4">
     <h1>All Bookings</h1>
-
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h1>Manage Restaurant Menu</h1>
+            <a asp-controller="Users" asp-action="Admin" class="btn btn-secondary">
+                <i class="bi bi-arrow-left me-2"></i>Back to Dashboard
+            </a>
+        </div>
     @if (TempData["SuccessMessage"] != null)
     {
         <div class="alert alert-success alert-dismissible fade show">

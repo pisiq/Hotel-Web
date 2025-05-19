@@ -74,6 +74,8 @@ builder.Services.AddScoped<IRestaurantRepository, RestaurantRepository>();
 builder.Services.AddScoped<IRestaurantService, RestaurantService>();
 builder.Services.AddScoped<IContactSettingsRepository, ContactSettingsRepository>();
 builder.Services.AddScoped<IContactSettingsService, ContactSettingsService>();
+builder.Services.AddScoped<IAboutRepository, AboutRepository>();
+builder.Services.AddScoped<IAboutService, AboutService>();
 
 
 

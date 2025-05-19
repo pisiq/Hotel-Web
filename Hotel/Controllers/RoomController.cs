@@ -171,5 +171,6 @@ namespace Hotel.Controllers
             var rooms = await _roomService.GetAllRoomsWithDetailsAsync();
             return View(rooms);
         }
+        
     }
 }

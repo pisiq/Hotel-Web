@@ -1,4 +1,6 @@
-﻿namespace Hotel.Models
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace Hotel.Models
 {
     public class Room
     {
@@ -22,6 +24,7 @@
         public Location Location { get; set; }
 
         public int LocationId { get; set; }
+      
     }
 }
 

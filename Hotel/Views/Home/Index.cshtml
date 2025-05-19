@@ -2,28 +2,12 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="hero">
-    <div>
-        <h1>Welcome to Luxury Hotel</h1>
-        <p>Experience the best stay with world-class services</p>
-        <a class="btn btn-warning btn-outline-danger" asp-area="" asp-controller="Locations" asp-action="Index">Explore Options</a>
+<div class="hero d-flex justify-content-center align-items-center">
+    <div class="text-center">
+        <h1 class="mb-4">Welcome to Luxury Hotel</h1>
+        <p class="lead mb-4">Experience the best stay with world-class services</p>
+        <a class="btn btn-warning btn-outline-danger px-4 py-2" asp-area="" asp-controller="Room" asp-action="AllRooms">
+            Explore Options
+        </a>
     </div>
-</div>
-
-<div class="container my-5 text-center" id="about">
-    <a class="text-dark fw-bold" asp-area="" asp-controller="Home" asp-action="About">About Us</a>
-    <p class="text-center">
-        Luxury Hotel offers premium accommodations with breathtaking views, gourmet dining, and
-        exceptional service.
-    </p>
-</div>
-
-<div class="container my-5 text-center" id="contact">
-    <a class="text-center text-dark" asp-area="" asp-controller="Home" asp-action="Contact">Contact Us</a>
-    <p class="text-center">
-        For inquiries, reach out to us at <strong>contact@luxuryhotel.com</strong> or call <strong>
-            +40
-            702 222 222
-        </strong>.
-    </p>
 </div>

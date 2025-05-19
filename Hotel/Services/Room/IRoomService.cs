@@ -16,5 +16,6 @@ namespace Hotel.Services
         Task<bool> DeleteRoomAsync(int id);
         Task<bool> UpdateRoomPhotoAsync(RoomPhoto photo, IFormFile? file);
         Task<bool> DeleteRoomPhotoAsync(int photoId);
+
     }
 }

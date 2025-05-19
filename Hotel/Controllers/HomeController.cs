@@ -8,13 +8,18 @@ namespace WebApplication1.Controllers
 {
     public class HomeController : Controller
     {
-       private readonly ILogger<HomeController> _logger;
-       private readonly IContactSettingsService _contactSettingsService;
+        private readonly ILogger<HomeController> _logger;
+        private readonly IContactSettingsService _contactSettingsService;
+        private readonly IAboutService _aboutService;
 
-        public HomeController(ILogger<HomeController> logger, IContactSettingsService contactSettingsService)
+        public HomeController(
+            ILogger<HomeController> logger,
+            IContactSettingsService contactSettingsService,
+            IAboutService aboutService)
         {
             _logger = logger;
             _contactSettingsService = contactSettingsService;
+            _aboutService = aboutService;
         }
 
         public IActionResult Index()
@@ -54,6 +59,12 @@ namespace WebApplication1.Controllers
 
             TempData["SuccessMessage"] = "Your message has been sent successfully. We will get back to you soon.";
             return RedirectToAction(nameof(Contact));
+        }
+
+        public async Task<IActionResult> About()
+        {
+            var aboutContent = await _aboutService.GetAboutAsync();
+            return View(aboutContent);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

@@ -67,7 +67,7 @@
                     <div class="card-body text-center d-flex flex-column align-items-center justify-content-center">
                         <div class="display-1 fw-bold text-warning mb-3">@Model.TotalLocations</div>
                         <p class="card-text">Total property locations</p>
-                        <a asp-controller="Locations" asp-action="Index" class="btn btn-outline-warning mt-3">
+                        <a asp-controller="Location" asp-action="Index" class="btn btn-outline-warning mt-3">
                             <i class="bi bi-gear-fill me-2"></i>Manage Locations
                         </a>
                     </div>
@@ -130,6 +130,21 @@
                         <p class="card-text">Manage contact information displayed to users</p>
                         <a asp-controller="ContactSettings" asp-action="Edit" class="btn btn-outline-secondary mt-3">
                             <i class="bi bi-pencil-fill me-2"></i>Edit Contact Info
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <!-- About Page Card -->
+            <div class="col-md-3 mb-4">
+                <div class="card h-100 border-info shadow">
+                    <div class="card-header bg-info text-white">
+                        <h5 class="mb-0"><i class="bi bi-info-circle-fill me-2"></i>About Page</h5>
+                    </div>
+                    <div class="card-body text-center d-flex flex-column align-items-center justify-content-center">
+                        <div class="display-4 fw-bold text-info mb-3"><i class="bi bi-file-earmark-text"></i></div>
+                        <p class="card-text">Manage the content on your About page</p>
+                        <a asp-controller="About" asp-action="Edit" class="btn btn-outline-info mt-3">
+                            <i class="bi bi-pencil-fill me-2"></i>Edit About Content
                         </a>
                     </div>
                 </div>

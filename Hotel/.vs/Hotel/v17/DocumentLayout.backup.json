@@ -36,19 +36,19 @@
         },
         {
           "DockedWidth": 256,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Login.cshtml",
-              "DocumentMoniker": "C:\\Users\\User\\WebstormProjects\\untitled\\Hotel\\Views\\Shared\\Login.cshtml",
-              "RelativeDocumentMoniker": "Views\\Shared\\Login.cshtml",
-              "ToolTip": "C:\\Users\\User\\WebstormProjects\\untitled\\Hotel\\Views\\Shared\\Login.cshtml",
-              "RelativeToolTip": "Views\\Shared\\Login.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "DocumentIndex": 0,
+              "Title": "_Layout.cshtml",
+              "DocumentMoniker": "C:\\Users\\User\\WebstormProjects\\untitled\\Hotel\\Views\\Shared\\_Layout.cshtml",
+              "RelativeDocumentMoniker": "Views\\Shared\\_Layout.cshtml",
+              "ToolTip": "C:\\Users\\User\\WebstormProjects\\untitled\\Hotel\\Views\\Shared\\_Layout.cshtml",
+              "RelativeToolTip": "Views\\Shared\\_Layout.cshtml",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAswC8AAAAOAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-05-10T13:40:57.872Z",
+              "WhenOpened": "2025-05-10T12:47:50.79Z",
               "EditorCaption": ""
             },
             {
@@ -65,16 +65,15 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "_Layout.cshtml",
-              "DocumentMoniker": "C:\\Users\\User\\WebstormProjects\\untitled\\Hotel\\Views\\Shared\\_Layout.cshtml",
-              "RelativeDocumentMoniker": "Views\\Shared\\_Layout.cshtml",
-              "ToolTip": "C:\\Users\\User\\WebstormProjects\\untitled\\Hotel\\Views\\Shared\\_Layout.cshtml",
-              "RelativeToolTip": "Views\\Shared\\_Layout.cshtml",
-              "ViewState": "AgIAAAkAAAAAAAAAAAAswC8AAAAOAAAAAAAAAA==",
+              "DocumentIndex": 2,
+              "Title": "Login.cshtml",
+              "DocumentMoniker": "C:\\Users\\User\\WebstormProjects\\untitled\\Hotel\\Views\\Shared\\Login.cshtml",
+              "RelativeDocumentMoniker": "Views\\Shared\\Login.cshtml",
+              "ToolTip": "C:\\Users\\User\\WebstormProjects\\untitled\\Hotel\\Views\\Shared\\Login.cshtml",
+              "RelativeToolTip": "Views\\Shared\\Login.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-05-10T12:47:50.79Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-10T13:40:57.872Z"
             }
           ]
         }

@@ -330,7 +330,6 @@ C:\Facultate\web\Hotel\bin\Debug\net9.0\ru\Microsoft.CodeAnalysis.Scripting.reso
 C:\Facultate\web\Hotel\bin\Debug\net9.0\tr\Microsoft.CodeAnalysis.Scripting.resources.dll
 C:\Facultate\web\Hotel\bin\Debug\net9.0\zh-Hans\Microsoft.CodeAnalysis.Scripting.resources.dll
 C:\Facultate\web\Hotel\bin\Debug\net9.0\zh-Hant\Microsoft.CodeAnalysis.Scripting.resources.dll
-C:\Facultate\web\Hotel\obj\Debug\net9.0\compressed\d86ydhinhk-1pc11rbwgk.gz
 C:\Facultate\web\Hotel\obj\Debug\net9.0\compressed\zwfzuoh8qy-fr7q2aak1r.gz
 C:\Facultate\web\Hotel\obj\Debug\net9.0\compressed\yacd2oxl81-l3n5xuwxn8.gz
 C:\Facultate\web\Hotel\obj\Debug\net9.0\compressed\an56o4s7w7-ilo7uva0vt.gz
@@ -691,3 +690,4 @@ C:\Users\User\WebstormProjects\untitled\Hotel\obj\Debug\net9.0\staticwebassets.u
 C:\Users\User\WebstormProjects\untitled\Hotel\obj\Debug\net9.0\Hotel.csproj.Up2Date
 C:\Users\User\WebstormProjects\untitled\Hotel\obj\Debug\net9.0\Hotel.genruntimeconfig.cache
 C:\Users\User\WebstormProjects\untitled\Hotel\obj\Debug\net9.0\ref\Hotel.dll
+C:\Facultate\web\Hotel\obj\Debug\net9.0\compressed\d86ydhinhk-mhnhtpy9m3.gz

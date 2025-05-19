@@ -14,7 +14,7 @@
     <div class="row">
         <div class="col-md-6">
             <div class="card shadow mb-4">
-                <div class="card-header bg-primary text-white">
+                <div class="card-header bg-danger text-white">
                     <h5 class="mb-0">Room Details</h5>
                 </div>
                 <div class="card-body">
@@ -30,7 +30,7 @@
                 <input type="hidden" asp-for="RoomId" />
 
                 <div class="card shadow mb-4">
-                    <div class="card-header bg-primary text-white">
+                    <div class="card-header bg-warning text-white">
                         <h5 class="mb-0">Select Dates</h5>
                     </div>
                     <div class="card-body">
@@ -63,7 +63,7 @@
                 </div>
 
                 <div class="mb-3">
-                    <button type="submit" class="btn btn-primary">Confirm Booking</button>
+                        <button type="submit" class="btn btn-warning btn-outline-danger">Confirm Booking</button>
                     <a asp-controller="Room" asp-action="Details" asp-route-id="@Model.RoomId" class="btn btn-outline-secondary">Cancel</a>
                 </div>
             </form>

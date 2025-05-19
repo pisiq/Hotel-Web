@@ -84,11 +84,11 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav ms-auto fw-bold">
-                        <li class="nav-item"><a class="nav-link" href="About.html">About</a></li>
+                        <!-- Inside _Layout.cshtml navbar -->
+                        <li class="nav-item"><a class="nav-link" asp-controller="Home" asp-action="About">About</a></li>
                         <li class="nav-item"><a class="nav-link" asp-controller="Room" asp-action="AllRooms">Rooms</a></li>
                         <li class="nav-item"><a class="nav-link" asp-controller="Home" asp-action="Contact">Contact</a></li>
                         <li class="nav-item"><a class="nav-link" asp-controller="Location" asp-action="AllLocations">Locations</a></li>
-                        <li class="nav-item"><a class="nav-link" href="Review.html">Reviews</a></li>
                     </ul>
                 </div>
             </div>
@@ -100,11 +100,17 @@
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2025 - Hotel - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+    <footer class="bg-dark text-white py-4 mt-3 footer">
+        <div class="container text-center text-md-start">
+            <div class="row align-items-center">
+                <div class="col-md-4 mb-3 mb-md-0">
+                    <h5>Luxury Hotel</h5>
+                    <p class="mb-0">&copy; 2025 - All rights reserved</p>
+                </div>
+            </div>
         </div>
     </footer>
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
